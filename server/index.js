@@ -31,23 +31,33 @@ app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
 //Auth routes
+
+//Log In
+app.get("/api/user", (req, res) => {
+  const tokenData = jwt.verify(req.cookies.auth_token, secret);
+  User.findById(tokenData.id).then((userData) => {
+    res.json(userData);
+  });
+});
+
+//Sign Up
 app.post("/api/signup", (req, res) => {
   const { username, email, password } = req.body;
   //hashes password before saving to collection
-  const hashedPassword = bcrypt.hashSync(password, 10);
+  const hashedPassword = bcrypt.hashSync(req.body.password, 10);
   const user = new User({ username, email, password: hashedPassword });
   //saves to collection
   user.save().then((userData) => {
     //create login token
     jwt.sign(
-      { id: userData._id, username: userData.username },
+      { id: userData._id, username: userData.username, email: userData.email },
       secret,
       (err, token) => {
         if (err) {
           console.error(err);
           res.status(500);
         } else {
-          res.cookie("auth_token", token).send({
+          res.cookie("auth_token", token).json({
             id: userData._id,
             username: userData.username,
             email: userData.email,

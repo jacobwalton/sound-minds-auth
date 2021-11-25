@@ -12,9 +12,7 @@ const SignUp = () => {
 
   const registerUser = (e) => {
     e.preventDefault();
-
-    console.log(user);
-    const userData = { username, email, password };
+    const userData = { email, username, password };
     axios
       .post("http://localhost:5000/api/signup", userData, {
         withCredentials: true,
