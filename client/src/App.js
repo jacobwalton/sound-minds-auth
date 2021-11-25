@@ -10,6 +10,7 @@ import axios from "axios";
 function App() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/user", { withCredentials: true })
@@ -17,6 +18,7 @@ function App() {
         setEmail(res.data.email);
         setUsername(res.data.username);
       });
+    setAuthenticated(true);
   }, []);
 
   const logout = () => {
@@ -25,6 +27,8 @@ function App() {
       .then(() => {
         setEmail("");
       });
+    setAuthenticated(false);
+
     window.location = "/";
   };
   return (
