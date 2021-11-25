@@ -10,7 +10,12 @@ function App() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   useEffect(() => {
-    axios.get("http://localhost:5000/api/user", { withCredentials: true });
+    axios
+      .get("http://localhost:5000/api/user", { withCredentials: true })
+      .then((res) => {
+        setEmail(res.data.email);
+        setUsername(res.data.username);
+      });
   }, []);
   return (
     <UserContext.Provider value={{ username, setUsername, email, setEmail }}>
