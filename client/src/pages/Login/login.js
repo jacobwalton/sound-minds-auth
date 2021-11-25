@@ -11,11 +11,11 @@ const Login = () => {
 
   const user = useContext(UserContext);
 
-  const registerUser = (e) => {
+  const loginUser = (e) => {
     e.preventDefault();
     const userData = { email, username, password };
     axios
-      .post("http://localhost:5000/api/signup", userData, {
+      .post("http://localhost:5000/api/login", userData, {
         withCredentials: true,
       })
       .then((response) => {
@@ -55,11 +55,7 @@ const Login = () => {
       <div className="rightContainer">
         {/* Signup container */}
         <div className="signupContainer">
-          <form
-            className="signupForm"
-            action=""
-            onSubmit={(e) => registerUser(e)}
-          >
+          <form className="signupForm" action="" onSubmit={(e) => loginUser(e)}>
             {/* username */}
             <input
               type="text"
@@ -67,13 +63,7 @@ const Login = () => {
               placeholder="Enter username..."
               onChange={(e) => setUsername(e.target.value)}
             />
-            {/* email */}
-            <input
-              type="text"
-              value={email}
-              placeholder="email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
+
             {/* password */}
             <input
               type="password"
@@ -81,13 +71,13 @@ const Login = () => {
               placeholder="password..."
               onChange={(e) => setPassword(e.target.value)}
             />
-            <input type="submit" className="submit" value="Sign Up" />
+            <input type="submit" className="submit" value="Log In" />
 
             <div className="redirect">
-              <a href="/login">
-                Already have an account?
+              <a href="/">
+                Don't have an account yet?
                 <br />
-                Login here!
+                Sign up here!
               </a>
             </div>
           </form>

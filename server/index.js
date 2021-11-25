@@ -72,6 +72,34 @@ app.post("/api/signup", (req, res) => {
   });
 });
 
+//Log in
+app.post("/api/login", (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({ username }).then((userData) => {
+    //comparing password and hashed password
+    const passwordMatch = bcrypt.compareSync(password, userData.password);
+    if (passwordMatch) {
+      jwt.sign({ id: userData._id, username }, secret, (err, token) => {
+        if (err) {
+          console.error(err);
+          res.status(500);
+        } else {
+          res.cookie("auth_token", token).json({
+            id: userData._id,
+            username: userData.username,
+            email: userData.email,
+          });
+        }
+      });
+    }
+  });
+});
+
+app.post("/api/logout", (req, res) => {
+  //clears cookie/token
+  res.cookie("auth_token", "").send();
+});
+
 app.listen(port, () => {
   console.log(`Running at http://localhost:${port} 🚀`);
 });
