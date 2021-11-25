@@ -1,0 +1,24 @@
+.colorPalete {
+  display: flex;
+}
+
+.box {
+  width: 100px;
+  height: 20px;
+}
+#dark-blue {
+  background-color: var(--dark-blue);
+}
+#midnight {
+  background-color: var(--midnight);
+}
+
+#mint {
+  background-color: var(--mint);
+}
+#orange {
+  background-color: var(--orange);
+}
+#sky-blue {
+  background-color: var(--sky-blue);
+}
