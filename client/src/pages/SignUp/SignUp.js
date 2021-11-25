@@ -7,10 +7,17 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const registerUser = (e) => {
+    e.preventDefault();
+
+    const newUser = { username, email, password };
+    axios.post("/api/signup", newUser);
+  };
+
   return (
     <div>
       Sign Up
-      <form>
+      <form action="" onSubmit={(e) => registerUser(e)}>
         {/* username */}
         <input
           type="text"

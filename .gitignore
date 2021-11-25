@@ -1,0 +1,11 @@
+.env
+
+/node_modules
+/build
+
+.DS_Store
+.vscode
+
+npm-debug.log*
+
+.prettierrc
