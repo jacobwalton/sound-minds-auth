@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const User = mongoose.model(
   "User",
@@ -8,3 +8,4 @@ const User = mongoose.model(
     password: { type: String, minLength: 6 },
   })
 );
+export default User;

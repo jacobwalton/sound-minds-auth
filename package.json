@@ -1,5 +1,6 @@
 {
   "name": "sound-minds-auth",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -21,11 +22,14 @@
   },
   "homepage": "https://github.com/jawalton6616/sound-minds-auth#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "json-web-token": "^3.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13"
   },
   "devDependencies": {
