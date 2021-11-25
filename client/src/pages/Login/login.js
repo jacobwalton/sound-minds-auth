@@ -1,10 +1,10 @@
-import "./signup.css";
+import "./login.css";
 import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../../helpers/UserContext";
 import Colors from "../../components/Colors/Colors";
 
-const Signup = () => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,4 +97,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

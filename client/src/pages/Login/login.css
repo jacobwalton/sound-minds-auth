@@ -1,0 +1,169 @@
+.container {
+  display: flex;
+}
+.leftContainer {
+  width: 55%;
+}
+.headerText {
+  font-family: var(--header-font);
+  color: var(--midnight);
+  font-size: 100px;
+  line-height: 80%;
+}
+
+.header {
+  margin: 20px;
+  margin-top: 0px;
+}
+
+.colorPalete {
+  position: relative;
+  top: 50px;
+  width: 350px;
+  height: 5px;
+}
+
+.aboutText {
+  font-family: var(--primary-font);
+  font-weight: 300;
+  font-size: 24px;
+  margin: 20px;
+  width: 90%;
+  color: var(--midnight);
+}
+
+.signupBar {
+  font-family: var(--header-font);
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--white);
+  background-color: var(--dark-blue);
+  padding: 15px;
+
+  width: 100%;
+  text-align: center;
+  margin-top: 60px;
+  z-index: 3;
+}
+
+.footerText {
+  font-family: var(--primary-font);
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: var(--midnight);
+}
+
+/* Right side */
+@keyframes slideIn {
+  from {
+    width: 0%;
+    opacity: 0%;
+  }
+  to {
+    width: 45%;
+    opacity: 100%;
+  }
+}
+
+@keyframes slideInBox {
+  from {
+    transform: translateX(300px);
+    opacity: 0%;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 100%;
+  }
+}
+.rightContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 45%;
+  height: 100vh;
+  background-color: var(--midnight);
+  box-shadow: inset 0 3vw 6vw rgba(0, 0, 0, 0.2),
+    inset 0 -3vw 6vw rgba(0, 0, 0, 0.2);
+  animation: slideIn 1s ease-in-out 1;
+}
+
+.signupContainer {
+  display: flex;
+  position: absolute;
+  bottom: 15px;
+  width: 40%;
+  height: 80%;
+  min-height: 500px;
+  min-width: 400px;
+  background-color: var(--mint);
+  border-radius: 0px 20px 20px 0px;
+  animation: slideInBox 1s ease-in-out 1;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+}
+.validate {
+  margin-bottom: 25px;
+}
+label {
+  font-family: var(--primary-font);
+  color: var(--midnight);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+input::placeholder {
+  color: var(--midnight);
+  font-family: var(--primary-font);
+  font-size: 15px;
+}
+input {
+  padding: 10px;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-out;
+  margin: 10px;
+}
+
+input:focus {
+  transform: translateY(-2px);
+}
+
+.submit {
+  background-color: var(--orange);
+  color: var(--white);
+  font-family: var(--primary-font);
+  font-weight: bold;
+  font-size: 24px;
+  padding: 10px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #b65f49;
+}
+
+.submit:active {
+  transform: translateY(2px);
+}
+
+.redirect {
+  color: grey;
+  text-align: center;
+  margin: 10px;
+}
+
+a {
+  color: grey;
+}
+
+@media only screen and (max-width: 600px) {
+  /* TODO: need to add */
+}
