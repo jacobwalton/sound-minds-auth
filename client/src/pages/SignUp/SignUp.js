@@ -21,6 +21,9 @@ const Signup = () => {
       .then((response) => {
         user.setEmail(response.data.email);
         user.setUsername(response.data.username);
+        // user.setEmail("");
+        // user.setUsername("");
+        window.location = "/profile";
       });
   };
 

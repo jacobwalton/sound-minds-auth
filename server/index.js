@@ -77,6 +77,9 @@ app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
   User.findOne({ username }).then((userData) => {
     //comparing password and hashed password
+    if (!userData) {
+      return res.json({ message: "Login unsuccessful" }).send();
+    }
     const passwordMatch = bcrypt.compareSync(password, userData.password);
     if (passwordMatch) {
       jwt.sign({ id: userData._id, username }, secret, (err, token) => {
@@ -91,6 +94,9 @@ app.post("/api/login", (req, res) => {
           });
         }
       });
+      //if password doesn't match
+    } else {
+      res.sendStatus(401);
     }
   });
 });
@@ -98,6 +104,7 @@ app.post("/api/login", (req, res) => {
 app.post("/api/logout", (req, res) => {
   //clears cookie/token
   res.cookie("auth_token", "").send();
+  window.location = "/";
 });
 
 app.listen(port, () => {

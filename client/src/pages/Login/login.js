@@ -8,6 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginErr, setLoginErr] = useState(false);
 
   const user = useContext(UserContext);
 
@@ -21,6 +22,13 @@ const Login = () => {
       .then((response) => {
         user.setEmail(response.data.email);
         user.setUsername(response.data.username);
+        // user.setEmail("");
+        // user.setUsername("");
+        setLoginErr(false);
+        window.location = "/profile";
+      })
+      .catch(() => {
+        setLoginErr(true);
       });
   };
 
@@ -57,6 +65,9 @@ const Login = () => {
         <div className="signupContainer">
           <form className="signupForm" action="" onSubmit={(e) => loginUser(e)}>
             {/* username */}
+            {loginErr && (
+              <p className="loginErr">Username or password is incorrect</p>
+            )}
             <input
               type="text"
               value={username}
