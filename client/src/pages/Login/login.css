@@ -138,6 +138,9 @@ input {
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-out;
   margin: 10px;
+  font-family: var(--primary-font);
+  font-size: 18px;
+  color: var(--midnight);
 }
 
 input:focus {

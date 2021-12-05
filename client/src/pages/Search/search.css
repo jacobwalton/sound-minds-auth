@@ -1,0 +1,26 @@
+.searchContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#search {
+  margin-top: 130px;
+  width: 80%;
+  animation: searchAnimation 1s ease-in-out 0.5s;
+}
+
+#search::placeholder {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@keyframes searchAnimation {
+  from {
+    margin-top: 00px;
+    width: 1%;
+  }
+  to {
+    margin-top: 130px;
+    width: 80%;
+  }
+}
