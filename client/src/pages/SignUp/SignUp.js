@@ -8,6 +8,7 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signupError, setSignupError] = useState("");
 
   const user = useContext(UserContext);
 
@@ -24,6 +25,14 @@ const Signup = () => {
         // user.setEmail("");
         // user.setUsername("");
         window.location = "/profile";
+      })
+      .catch((err) => {
+        if (JSON.stringify(err).includes("createError")) {
+          setSignupError("User already registered with username or email");
+        }
+
+        console.log("Signup Error:", JSON.stringify(err));
+        console.log(typeof JSON.stringify(err));
       });
   };
 
@@ -63,6 +72,7 @@ const Signup = () => {
             action=""
             onSubmit={(e) => registerUser(e)}
           >
+            <p className="loginErr">{signupError}</p>
             {/* username */}
             <input
               type="text"
@@ -71,6 +81,7 @@ const Signup = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
             {/* email */}
+
             <input
               type="text"
               value={email}

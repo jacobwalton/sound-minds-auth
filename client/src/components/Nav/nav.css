@@ -57,7 +57,9 @@ a {
   border-radius: 100%;
   font-size: 400%;
   font-family: var(--primary-font);
+  font-weight: 600;
   text-align: center;
+  line-height: 1.2;
 }
 .favorites-nav {
   display: flex;
