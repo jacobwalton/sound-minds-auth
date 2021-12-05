@@ -31,7 +31,6 @@ app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
 //Auth routes
-
 //Log In
 app.get("/api/user", (req, res) => {
   const tokenData = jwt.verify(req.cookies.auth_token, secret);
