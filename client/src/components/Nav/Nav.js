@@ -1,6 +1,9 @@
 import "./nav.css";
+// eslint-disable-next-line
 import star from "../../assets/star_icon.png";
+// eslint-disable-next-line
 import logout from "../../assets/logout_icon.png";
+// eslint-disable-next-line
 import search from "../../assets/search_icon.png";
 
 const Nav = () => {

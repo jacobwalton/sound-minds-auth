@@ -9,6 +9,14 @@
   --header-font: "Playfair Display", serif;
   --primary-font: "Josefin Slab", serif;
 }
+.nav {
+  z-index: 5;
+  opacity: 90%;
+}
+
+.nav:hover {
+  opacity: 100%;
+}
 
 body {
   background: var(--white);

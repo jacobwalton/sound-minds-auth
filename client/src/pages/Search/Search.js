@@ -5,6 +5,7 @@ const Search = () => {
   const [results, setResults] = useState([]);
 
   const [searchParam, setSearchParam] = useState("");
+  // eslint-disable-next-line
   const [searchType, setSearchType] = useState("");
   const proxyurl = "https://corsanywhere.herokuapp.com/";
 
@@ -52,11 +53,33 @@ const Search = () => {
           </button>
         </div>
       </form>
+
       <div className="results">
         {/* Search Results */}
         {results.map((item, key) => (
           <div key={key} className="result">
-            <h2>
+            <img
+              src={
+                searchType === "album"
+                  ? item.cover
+                  : searchType === ""
+                  ? item.album.cover_xl
+                  : searchType === "track"
+                  ? item.album.cover
+                    ? item.album.cover_xl
+                    : "https://via.placeholder.com/150"
+                  : searchType === "artist"
+                  ? item.picture_small
+                  : "https://via.placeholder.com/150"
+              }
+              onMouseOver={(e) =>
+                (e.currentTarget.src = item.artist.picture_xl)
+              }
+              onMouseOut={(e) => (e.currentTarget.src = item.album.cover_xl)}
+              alt={`${item.title} cover art`}
+              className="coverArt"
+            />
+            <h4 className="title">
               {searchType === "album"
                 ? item.title
                 : searchType === "artist"
@@ -64,31 +87,32 @@ const Search = () => {
                 : searchType === "track"
                 ? item.name
                 : item.title}
-            </h2>
-            <img
-              src={
-                searchType === "album"
-                  ? item.cover
-                  : searchType === ""
-                  ? item.album.cover
-                  : searchType === "track"
-                  ? item.album.cover
-                    ? item.album.cover
-                    : "https://via.placeholder.com/150"
-                  : searchType === "artist"
-                  ? item.picture_small
-                  : "https://via.placeholder.com/150"
-              }
-              alt="Item description"
-            />
+            </h4>
+            <div className="details">
+              <p>Artist: {item.artist.name}</p>
+              <p>Album: {item.album.title}</p>
+              {item.explicit_lyrics === true ? (
+                <em className="lyrics">Lyrics: Explit</em>
+              ) : (
+                <em className="lyrics">Lyrics: Clean</em>
+              )}
+              <br />
+
+              <p>
+                <a className="link" href={item.link}>
+                  View
+                </a>
+              </p>
+            </div>
             <br />
-            {searchType === "artist" || searchType === "album" ? (
-              <a href={item.link}>View</a>
-            ) : (
-              <audio src={item.preview} controls>
-                Your browser does not support the audio element.
-              </audio>
-            )}
+            <audio
+              className="audioPreview"
+              src={item.preview}
+              controls
+              controlsList="nodownload noplaybackrate"
+            >
+              Your browser does not support the audio element.
+            </audio>
           </div>
         ))}
       </div>

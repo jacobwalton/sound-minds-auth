@@ -6,6 +6,7 @@ import Colors from "../../components/Colors/Colors";
 
 const Login = () => {
   const [username, setUsername] = useState("");
+  // eslint-disable-next-line
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginErr, setLoginErr] = useState(false);

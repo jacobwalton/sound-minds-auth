@@ -1,15 +1,23 @@
 .searchContainer {
-  display: flex;
+  display: grid;
   justify-content: center;
+  height: fit-content;
 }
+
 .searchSection {
+  z-index: 0;
   width: 100%;
-  margin: auto;
-  margin-left: 20px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.356);
+  left: 0px;
+  top: 0px;
+
+  height: fit-content;
 }
 #search {
   margin-top: 130px;
-  width: 70%;
+  margin-left: 20px;
+  width: 60%;
   animation: searchAnimation 0.3s ease-in-out 0.5s;
   margin-right: 0px;
   border-radius: 20px 0px 0px 20px;
@@ -32,6 +40,15 @@
   to {
     margin-top: 130px;
     width: 70%;
+  }
+}
+
+@keyframes resultAnimation {
+  from {
+    transform: translateY(500px);
+  }
+  to {
+    transform: translateY(0px);
   }
 }
 
@@ -62,8 +79,74 @@ form {
 .results {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 200px;
+  justify-content: center;
 }
 .result {
+  text-align: center;
+  width: fit-content;
+  padding: 15px;
+  border-radius: 20px;
+  height: fit-content;
   background-color: var(--orange);
   margin: 5px;
+  animation: resultAnimation 0.5s ease-in-out;
+}
+
+.result:nth-child(3n + 3) {
+  background-color: var(--midnight);
+}
+
+.result:nth-child(3n + 1) {
+  background-color: var(--dark-blue);
+}
+
+.title {
+  text-align: left;
+  color: var(--white);
+  max-width: 250px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-family: var(--header-font);
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+
+.details {
+  text-align: left;
+  color: white;
+  font-family: var(--primary-font);
+  font-weight: bold;
+}
+
+.link {
+  color: var(--white);
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+audio {
+  position: relative;
+  bottom: 0px;
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
+
+  /* filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%); */
+  width: 250px;
+  height: 60px;
+
+  outline: none;
+}
+audio::-webkit-media-controls-panel {
+  background-color: #e09f81;
+}
+
+.coverArt {
+  width: 250px;
+  margin: 0 auto;
+  padding: 0px;
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
+  border-radius: 10px;
+  transition: all 0.09s;
 }

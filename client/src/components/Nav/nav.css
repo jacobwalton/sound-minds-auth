@@ -1,5 +1,6 @@
 /* nav styling */
 .nav {
+  z-index: 5;
   width: 400px;
   display: flex;
   flex-direction: row;

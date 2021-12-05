@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Search from "./pages/Search/Search";
 import Favorites from "./pages/Favorites/Favorites";
 import Profile from "./pages/Profile/Profile";
+// eslint-disable-next-line
 import Nav from "./components/Nav/Nav";
 import UserContext from "./helpers/UserContext";
 import star from "./assets/star_icon.png";
@@ -38,8 +39,7 @@ function App() {
   return (
     <UserContext.Provider value={{ username, setUsername, email, setEmail }}>
       <BrowserRouter>
-        {/* testing auth */}
-        <div>
+        <div className="nav">
           {!!username && (
             <div className="nav">
               {" "}
