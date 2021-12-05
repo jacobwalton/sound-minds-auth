@@ -1,0 +1,23 @@
+.profileContainer {
+  min-height: 100%;
+}
+.header {
+  font-family: var(--header-font);
+  font-size: 36px;
+  color: var(--midnight);
+  width: auto;
+}
+
+.userDetails {
+  font-family: var(--primary-font);
+  font-size: 28px;
+  color: var(--midnight);
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 200px;
+  background-color: var(--dark-blue);
+}
