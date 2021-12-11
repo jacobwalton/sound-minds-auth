@@ -3,13 +3,23 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../../helpers/UserContext";
 import Colors from "../../components/Colors/Colors";
+const img =
+  "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-eye-9.png";
 
 const Login = () => {
   const [username, setUsername] = useState("");
+
   // eslint-disable-next-line
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginErr, setLoginErr] = useState(false);
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  // Password toggle handler
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const user = useContext(UserContext);
 
@@ -78,10 +88,17 @@ const Login = () => {
 
             {/* password */}
             <input
-              type="password"
+              type={passwordShown ? "text" : "password"}
               value={password}
               placeholder="password..."
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <img
+              className="visible"
+              src={img}
+              id="eye"
+              onClick={togglePassword}
+              alt="show password icon"
             />
             <input type="submit" className="submit" value="Log In" />
 

@@ -82,6 +82,7 @@ form {
   margin-top: 200px;
   justify-content: center;
 }
+
 .result {
   text-align: center;
   width: fit-content;
@@ -90,6 +91,7 @@ form {
   height: fit-content;
   background-color: var(--orange);
   margin: 5px;
+  background-size: cover;
   animation: resultAnimation 0.5s ease-in-out;
 }
 
@@ -149,4 +151,10 @@ audio::-webkit-media-controls-panel {
   filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
   border-radius: 10px;
   transition: all 0.09s;
+}
+
+.noSearch {
+  font-family: var(--header-font);
+  color: var(--midnight);
+  font-size: 38px;
 }

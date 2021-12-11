@@ -13,7 +13,7 @@ const Profile = () => {
         <h1>{user.username}</h1>
       </div>
       <div className="userDetails">
-        <ul>
+        <ul className="detailList">
           <li>Member since: </li>
           <li>Number of comments: </li>
           <li>Number of favorites: </li>

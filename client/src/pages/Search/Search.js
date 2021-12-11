@@ -5,8 +5,7 @@ const Search = () => {
   const [results, setResults] = useState([]);
 
   const [searchParam, setSearchParam] = useState("");
-  // eslint-disable-next-line
-  const [searchType, setSearchType] = useState("");
+
   const proxyurl = "https://corsanywhere.herokuapp.com/";
 
   const baseUrl = `https://api.deezer.com/search/?q=${searchParam.replace(
@@ -56,65 +55,55 @@ const Search = () => {
 
       <div className="results">
         {/* Search Results */}
-        {results.map((item, key) => (
-          <div key={key} className="result">
-            <img
-              src={
-                searchType === "album"
-                  ? item.cover
-                  : searchType === ""
-                  ? item.album.cover_xl
-                  : searchType === "track"
-                  ? item.album.cover
-                    ? item.album.cover_xl
-                    : "https://via.placeholder.com/150"
-                  : searchType === "artist"
-                  ? item.picture_small
-                  : "https://via.placeholder.com/150"
-              }
-              onMouseOver={(e) =>
-                (e.currentTarget.src = item.artist.picture_xl)
-              }
-              onMouseOut={(e) => (e.currentTarget.src = item.album.cover_xl)}
-              alt={`${item.title} cover art`}
-              className="coverArt"
-            />
-            <h4 className="title">
-              {searchType === "album"
-                ? item.title
-                : searchType === "artist"
-                ? item.name
-                : searchType === "track"
-                ? item.name
-                : item.title}
-            </h4>
-            <div className="details">
-              <p>Artist: {item.artist.name}</p>
-              <p>Album: {item.album.title}</p>
-              {item.explicit_lyrics === true ? (
-                <em className="lyrics">Lyrics: Explit</em>
-              ) : (
-                <em className="lyrics">Lyrics: Clean</em>
-              )}
-              <br />
-
-              <p>
-                <a className="link" href={item.link}>
-                  View
-                </a>
-              </p>
-            </div>
-            <br />
-            <audio
-              className="audioPreview"
-              src={item.preview}
-              controls
-              controlsList="nodownload noplaybackrate"
+        {results.length > 0 ? (
+          results.map((item, key) => (
+            <div
+              key={key}
+              className="result"
+              // style={{
+              //   backgroundImage: `url(${item.artist.picture_xl})`,
+              // }}
             >
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-        ))}
+              <img
+                src={item.album.cover_xl}
+                onMouseOver={(e) =>
+                  (e.currentTarget.src = item.artist.picture_xl)
+                }
+                onMouseOut={(e) => (e.currentTarget.src = item.album.cover_xl)}
+                alt={`${item.title} cover art`}
+                className="coverArt"
+              />
+              <h4 className="title">{item.title}</h4>
+              <div className="details">
+                <p>Artist: {item.artist.name}</p>
+                <p>Album: {item.album.title}</p>
+                {item.explicit_lyrics === true ? (
+                  <em className="lyrics">Lyrics: Explit</em>
+                ) : (
+                  <em className="lyrics">Lyrics: Clean</em>
+                )}
+                <br />
+
+                <p>
+                  <a className="link" href={item.link}>
+                    View
+                  </a>
+                </p>
+              </div>
+              <br />
+              <audio
+                className="audioPreview"
+                src={item.preview}
+                controls
+                controlsList="nodownload noplaybackrate"
+              >
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          ))
+        ) : (
+          <h1 className="noSearch">Sound Off!</h1>
+        )}
       </div>
     </div>
   );

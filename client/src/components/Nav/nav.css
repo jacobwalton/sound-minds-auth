@@ -9,6 +9,7 @@
   justify-content: center;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
   z-index: 1;
+  transition: all 0.2s;
 }
 
 img {
@@ -36,16 +37,18 @@ img {
   width: 80px;
   height: 100px;
   background: var(--mint);
+  transition: all 0.1s linear;
 }
 
 .profile-nav {
   width: 80px;
   height: 100px;
   background: var(--orange);
-
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.1s linear;
+  color: var(--dark-blue);
 }
 a {
   text-decoration: none;
@@ -68,6 +71,7 @@ a {
   width: 80px;
   height: 100px;
   background: var(--midnight);
+  transition: all 0.1s linear;
 }
 .logout-nav {
   display: flex;
@@ -76,4 +80,23 @@ a {
   width: 80px;
   height: 100px;
   background: var(--sky-blue);
+  transition: all 0.1s linear;
+}
+
+.search-nav:hover {
+  width: 82px;
+  height: 101px;
+}
+
+.profile-nav:hover {
+  width: 82px;
+  height: 101px;
+}
+.favorites-nav:hover {
+  width: 82px;
+  height: 101px;
+}
+.logout-nav:hover {
+  width: 83px;
+  height: 103px;
 }

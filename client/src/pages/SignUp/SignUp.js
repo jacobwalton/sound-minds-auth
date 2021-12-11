@@ -3,12 +3,21 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../../helpers/UserContext";
 import Colors from "../../components/Colors/Colors";
+const img =
+  "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-eye-9.png";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signupError, setSignupError] = useState("");
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  // Password toggle handler
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const user = useContext(UserContext);
 
@@ -77,7 +86,7 @@ const Signup = () => {
             <input
               type="text"
               value={username}
-              placeholder="Enter username..."
+              placeholder="Username..."
               onChange={(e) => setUsername(e.target.value)}
             />
             {/* email */}
@@ -85,16 +94,26 @@ const Signup = () => {
             <input
               type="text"
               value={email}
-              placeholder="email"
+              placeholder="Email..."
               onChange={(e) => setEmail(e.target.value)}
             />
             {/* password */}
+
             <input
-              type="password"
+              type={passwordShown ? "text" : "password"}
               value={password}
-              placeholder="password..."
+              placeholder="Password..."
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            <img
+              className="visible"
+              src={img}
+              id="eye"
+              onClick={togglePassword}
+              alt="show password icon"
+            />
+
             <input type="submit" className="submit" value="Sign Up" />
 
             <div className="redirect">

@@ -135,6 +135,20 @@ input:focus {
   transform: translateY(-2px);
 }
 
+.visible {
+  color: grey;
+  background: none;
+  outline: none;
+  width: fit-content;
+  border: none;
+  position: relative;
+  right: -85%;
+  bottom: 7.5%;
+  padding: 0px;
+  mix-blend-mode: darken;
+  width: 20px;
+}
+
 .submit {
   background-color: var(--orange);
   color: var(--white);
