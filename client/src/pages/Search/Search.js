@@ -63,21 +63,25 @@ const Search = () => {
         {results.length > 0 ? (
           results.map((item, key) => (
             <div
-              key={key}
+              key={item.id}
               className="result"
               // style={{
               //   backgroundImage: `url(${item.artist.picture_xl})`,
               // }}
             >
-              <img
-                src={item.album.cover_xl}
-                onMouseOver={(e) =>
-                  (e.currentTarget.src = item.artist.picture_xl)
-                }
-                onMouseOut={(e) => (e.currentTarget.src = item.album.cover_xl)}
-                alt={`${item.title} cover art`}
-                className="coverArt"
-              />
+              <a href={`/track/${item.id}`}>
+                <img
+                  src={item.album.cover_xl}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.src = item.artist.picture_xl)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.src = item.album.cover_xl)
+                  }
+                  alt={`${item.title} cover art`}
+                  className="coverArt"
+                />
+              </a>
               <h4 className="title">{item.title}</h4>
               <div className="details">
                 <p>Artist: {item.artist.name}</p>

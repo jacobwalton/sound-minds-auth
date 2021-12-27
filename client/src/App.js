@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Search from "./pages/Search/Search";
 import Favorites from "./pages/Favorites/Favorites";
 import Profile from "./pages/Profile/Profile";
+import SongDetails from "./pages/SongDetails/SongDetails";
 // eslint-disable-next-line
 import Nav from "./components/Nav/Nav";
 import UserContext from "./helpers/UserContext";
@@ -87,6 +88,7 @@ function App() {
           <Route exact path="/" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/track/:trackId" component={SongDetails} />
           <Route exact path="/favorites" component={Favorites} />
           <Route exact path="/profile" component={Profile} />
         </Switch>
