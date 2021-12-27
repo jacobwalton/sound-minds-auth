@@ -6,9 +6,9 @@ const Search = () => {
 
   const [searchParam, setSearchParam] = useState("");
 
-  const proxyurl = "https://corsanywhere.herokuapp.com/";
+  // const proxyurl = "https://corsanywhere.herokuapp.com/";
 
-  const baseUrl = `https://api.deezer.com/search/?q=${searchParam.replace(
+  const baseUrl = `https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search/?q=${searchParam.replace(
     / /g,
     "%20"
   )}`;
@@ -19,16 +19,20 @@ const Search = () => {
 
   const fetchData = () => {
     // console.log(baseUrl);
-    return (
-      fetch(proxyurl + baseUrl, {
-        mode: "cors",
-        method: "GET",
+    // `https://api.allorigins.win/get?url=${encodeURIComponent(baseUrl)}`);
+    return fetch(baseUrl, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-      })
-        .then((res) => res.json())
-        // .then((data) => console.log(data.data));
-        .then((data) => setResults(data.data))
-    );
+        "Cache-Control": null,
+        "X-Requested-With": null,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setResults(data.data))
+      .catch((err) => console.log("ERROR: ", err));
   };
 
   const handleSearch = (e) => {

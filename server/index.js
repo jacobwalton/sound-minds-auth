@@ -20,13 +20,22 @@ mongoose
   .catch((err) => console.error(err));
 
 //Middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    Origin: "http://localhost:3000",
+    "Access-Control-Allow-Origin": "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    "Access-Control-Allow-Origin": "*",
   })
 );
 
+app.options("*", cors());
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
@@ -100,10 +109,11 @@ app.post("/api/login", (req, res) => {
   });
 });
 
+//Logout
 app.post("/api/logout", (req, res) => {
   //clears cookie/token
   res.cookie("auth_token", "").send();
-  window.location = "/";
+  // window.location = "/";
 });
 
 app.listen(port, () => {
