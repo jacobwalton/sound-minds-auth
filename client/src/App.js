@@ -39,8 +39,8 @@ function App() {
   return (
     <UserContext.Provider value={{ username, setUsername, email, setEmail }}>
       <BrowserRouter>
-        <div className="nav">
-          {username && (
+        {username && (
+          <div className="nav">
             <div className="nav">
               {" "}
               <Link to="/search">
@@ -80,8 +80,8 @@ function App() {
                 </div>
               </Link>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         <Switch>
           <Route exact path="/" component={Signup} />

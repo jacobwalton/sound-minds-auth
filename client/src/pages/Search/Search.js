@@ -6,8 +6,6 @@ const Search = () => {
 
   const [searchParam, setSearchParam] = useState("");
 
-  // const proxyurl = "https://corsanywhere.herokuapp.com/";
-
   const baseUrl = `https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search/?q=${searchParam.replace(
     / /g,
     "%20"
@@ -18,6 +16,9 @@ const Search = () => {
   };
 
   const fetchData = () => {
+    if (searchParam.length === 0) {
+      setSearchParam("Drake");
+    }
     // console.log(baseUrl);
     // `https://api.allorigins.win/get?url=${encodeURIComponent(baseUrl)}`);
     return fetch(baseUrl, {
@@ -25,7 +26,7 @@ const Search = () => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "https://localhost:3000",
         "Cache-Control": null,
         "X-Requested-With": null,
       },
