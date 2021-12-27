@@ -33,7 +33,10 @@ app.use(bodyParser.json({ extended: true }));
 //Auth routes
 //Log In
 app.get("/api/user", (req, res) => {
-  const tokenData = jwt.verify(req.cookies.auth_token, secret);
+  const tokenData = jwt.verify(
+    req.cookies.auth_token ? req.cookies.auth_token : "",
+    secret
+  );
   User.findById(tokenData.id).then((userData) => {
     res.json({
       id: userData._id,

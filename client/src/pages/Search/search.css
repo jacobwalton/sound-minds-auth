@@ -11,17 +11,16 @@
   background-color: rgba(0, 0, 0, 0.356);
   left: 0px;
   top: 0px;
-
   height: fit-content;
 }
 #search {
   margin-top: 130px;
   margin-left: 20px;
   width: 60%;
-  animation: searchAnimation 0.3s ease-in-out 0.5s;
+  animation: searchAnimation 0.3s ease-in-out;
   margin-right: 0px;
   border-radius: 20px 0px 0px 20px;
-  transition: none;
+  transition: all ease;
 }
 #search:focus {
   transform: translateY(0px);
@@ -34,7 +33,7 @@
 
 @keyframes searchAnimation {
   from {
-    margin-top: 00px;
+    margin-top: 0px;
     width: 1%;
   }
   to {
