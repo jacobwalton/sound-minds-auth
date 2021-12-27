@@ -40,49 +40,49 @@ function App() {
   return (
     <UserContext.Provider value={{ username, setUsername, email, setEmail }}>
       <BrowserRouter>
-        {username && (
+        {/* {username && ( */}
+        <div className="nav">
           <div className="nav">
-            <div className="nav">
-              {" "}
-              <Link to="/search">
-                <div className="search-nav">
-                  {" "}
-                  <img
-                    className="icon search-icon"
-                    src={search}
-                    alt="search icon"
-                  />
+            {" "}
+            <Link to="/search">
+              <div className="search-nav">
+                {" "}
+                <img
+                  className="icon search-icon"
+                  src={search}
+                  alt="search icon"
+                />
+              </div>
+            </Link>
+            <Link to="/profile">
+              <div className="profile-nav">
+                <div className="circle">
+                  {username.substr(0, 1).toUpperCase()}
                 </div>
-              </Link>
-              <Link to="/profile">
-                <div className="profile-nav">
-                  <div className="circle">
-                    {username.substr(0, 1).toUpperCase()}
-                  </div>
-                </div>
-              </Link>
-              <Link to="/favorites">
-                <div className="favorites-nav">
-                  <img
-                    className="icon fav-icon"
-                    src={star}
-                    alt="favorites icon"
-                  />
-                </div>
-              </Link>
-              <Link to="" onClick={() => logout()}>
-                <div className="logout-nav">
-                  {" "}
-                  <img
-                    className="icon logout-icon"
-                    src={logoutImg}
-                    alt="logout icon"
-                  />
-                </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
+            <Link to="/favorites">
+              <div className="favorites-nav">
+                <img
+                  className="icon fav-icon"
+                  src={star}
+                  alt="favorites icon"
+                />
+              </div>
+            </Link>
+            <Link to="" onClick={() => logout()}>
+              <div className="logout-nav">
+                {" "}
+                <img
+                  className="icon logout-icon"
+                  src={logoutImg}
+                  alt="logout icon"
+                />
+              </div>
+            </Link>
           </div>
-        )}
+        </div>
+        {/* )} */}
 
         <Switch>
           <Route exact path="/" component={Signup} />
