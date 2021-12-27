@@ -68,6 +68,7 @@ const Search = () => {
               // style={{
               //   backgroundImage: `url(${item.artist.picture_xl})`,
               // }}
+              trackId={item.id}
             >
               <a href={`/track/${item.id}`}>
                 <img
@@ -82,22 +83,24 @@ const Search = () => {
                   className="coverArt"
                 />
               </a>
-              <h4 className="title">{item.title}</h4>
-              <div className="details">
-                <p>Artist: {item.artist.name}</p>
-                <p>Album: {item.album.title}</p>
-                {item.explicit_lyrics === true ? (
-                  <em className="lyrics">Lyrics: Explit</em>
-                ) : (
-                  <em className="lyrics">Lyrics: Clean</em>
-                )}
-                <br />
+              <div>
+                <h4 className="title">{item.title}</h4>
+                <div className="details">
+                  <p>Artist: {item.artist.name}</p>
+                  <p>Album: {item.album.title}</p>
+                  {item.explicit_lyrics === true ? (
+                    <em className="lyrics">Lyrics: Explit</em>
+                  ) : (
+                    <em className="lyrics">Lyrics: Clean</em>
+                  )}
+                  <br />
 
-                <p>
-                  <a className="link" href={item.link}>
-                    View
-                  </a>
-                </p>
+                  <p>
+                    <a className="link" href={item.link}>
+                      View on Deezer®
+                    </a>
+                  </p>
+                </div>
               </div>
               <br />
               <audio
@@ -111,7 +114,15 @@ const Search = () => {
             </div>
           ))
         ) : (
-          <h1 className="noSearch">Sound Off!</h1>
+          <marquee
+            className="noSearch"
+            direction="down"
+            width="250"
+            height="200"
+            behavior="alternate"
+          >
+            <marquee behavior="alternate">Sound Off!</marquee>
+          </marquee>
         )}
       </div>
     </div>

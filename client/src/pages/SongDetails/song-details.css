@@ -1,0 +1,85 @@
+#main {
+  height: 50vh;
+  width: 100%;
+  background-color: var(--midnight);
+  display: flex;
+  animation: slideDown 0.5s ease-in-out 1;
+}
+.album-img {
+  height: 100%;
+  width: fit-content;
+}
+
+#colors {
+  padding: 0px;
+  margin: 0px;
+  transform: rotate(90deg);
+  position: relative;
+  top: 156px;
+  left: -158px;
+}
+.track-details {
+  color: var(--white);
+  position: relative;
+  left: -300px;
+  display: flex;
+  flex-direction: column;
+  line-height: 0px;
+  font-family: var(--primary-font);
+}
+a {
+  font-size: 18px;
+  margin-top: 10px;
+  color: var(--orange);
+  font-weight: bolder;
+}
+#title {
+  font-family: var(--header-font);
+}
+
+#artist-name {
+  font-size: 32px;
+  font-weight: lighter;
+}
+#album-name {
+  font-style: italic;
+  font-size: 20px;
+}
+#date {
+  font-weight: lighter;
+  font-size: 30px;
+}
+
+#audioPreview {
+  position: relative;
+  bottom: 0px;
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
+  margin-top: 30px;
+  /* filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%); */
+  width: 50vw;
+  height: 60px;
+  outline: none;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #e09f81;
+}
+
+.loading {
+  font-family: var(--header-font);
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  color: var(--midnight);
+  font-size: 48px;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}

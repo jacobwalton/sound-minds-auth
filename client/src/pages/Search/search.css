@@ -155,5 +155,8 @@ audio::-webkit-media-controls-panel {
 .noSearch {
   font-family: var(--header-font);
   color: var(--midnight);
-  font-size: 38px;
+  font-size: 48px;
+  width: 100vw;
+  height: 60vh;
+  font-weight: bolder;
 }
