@@ -1,11 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Login from "../src/pages/Login/Login";
-import Signup from "./pages/Signup/Signup";
-import Search from "./pages/Search/Search";
-import Favorites from "./pages/Favorites/Favorites";
-import Profile from "./pages/Profile/Profile";
-import SongDetails from "./pages/SongDetails/SongDetails";
+import Signup from "../src/pages/Signup/Signup";
+import Search from "../src/pages/Search/Search";
+import Favorites from "../src/pages/Favorites/Favorites";
+import Profile from "../src/pages/Profile/Profile";
+import SongDetails from "../src/pages/SongDetails/SongDetails";
 // eslint-disable-next-line
 import Nav from "./components/Nav/Nav";
 import UserContext from "./helpers/UserContext";
