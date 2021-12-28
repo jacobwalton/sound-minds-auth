@@ -13,7 +13,7 @@ const secret = process.env.REACT_APP_JWT_SECRET;
 const port = process.env.PORT || 5000;
 const app = express();
 
-//Connects to mongoose
+//Connects to db
 mongoose
   .connect(process.env.REACT_APP_MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log("Successfully connected to DB!"))
