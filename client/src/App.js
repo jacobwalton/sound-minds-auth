@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import Login from "./pages/Login/Login";
+import Login from "../src/pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Search from "./pages/Search/Search";
 import Favorites from "./pages/Favorites/Favorites";
