@@ -3,7 +3,7 @@
   width: 100%;
   background-color: var(--midnight);
   display: flex;
-  animation: slideDown 0.5s ease-in-out 1;
+  animation: slideDown 0.4s ease-out 1;
 }
 .album-img {
   height: 100%;
@@ -11,20 +11,25 @@
 }
 
 #colors {
-  padding: 0px;
-  margin: 0px;
+  display: block;
   transform: rotate(90deg);
   position: relative;
-  top: 156px;
-  left: -158px;
+  top: 0px;
 }
+
+#colors .box {
+  height: 70px;
+}
+
 .track-details {
   color: var(--white);
   position: relative;
   left: -300px;
   display: flex;
+  justify-content: space-evenly;
   flex-direction: column;
   line-height: 0px;
+
   font-family: var(--primary-font);
 }
 a {
@@ -40,22 +45,44 @@ a {
 #artist-name {
   font-size: 32px;
   font-weight: lighter;
+  margin: 0px;
 }
 #album-name {
   font-style: italic;
   font-size: 20px;
+  margin: 0px;
 }
+
 #date {
   font-weight: lighter;
   font-size: 30px;
+  margin: 0px;
+}
+#view-more {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  justify-content: space-between;
+  width: fit-content;
+  font-size: 20px;
+  margin-top: -40px;
+  text-shadow: 2px 2px 2px var(--dark-blue);
+}
+
+#artist-pic {
+  border-radius: 100%;
+  margin-left: 10px;
+}
+
+#artist-pic:hover {
+  filter: brightness(0.6);
 }
 
 #audioPreview {
   position: relative;
   bottom: 0px;
   filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
-  margin-top: 30px;
-  /* filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%); */
+  /* margin-top: 30px; */
   width: 50vw;
   height: 60px;
   outline: none;
@@ -76,10 +103,16 @@ audio::-webkit-media-controls-panel {
 }
 
 @keyframes slideDown {
-  from {
+  0% {
     transform: translateY(-100px);
   }
-  to {
+  80% {
+    transform: translateY(2px);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+  100% {
     transform: translateY(0px);
   }
 }

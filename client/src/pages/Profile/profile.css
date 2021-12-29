@@ -6,7 +6,7 @@
   font-size: 36px;
   color: var(--midnight);
   width: auto;
-  text-shadow: 2px 2px 1px var(--orange);
+  /* text-shadow: 1px 1px 3px var(--orange); */
 }
 
 .userDetails {
@@ -25,4 +25,9 @@
 
 .detailList {
   list-style: none;
+}
+
+#colors {
+  transform: rotate(0deg) !important;
+  left: -10px;
 }

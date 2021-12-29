@@ -50,7 +50,10 @@ const Signup = () => {
       <div className="leftContainer">
         {/* Color palete */}
         <div className="header">
-          <Colors className="colorPalete" />
+          <div className="colors">
+            <Colors className="colorPalete" />
+          </div>
+
           {/* Header */}
           <h1 className="headerText">
             SOUND
@@ -117,7 +120,7 @@ const Signup = () => {
             <input type="submit" className="submit" value="Sign Up" />
 
             <div className="redirect">
-              <a href="/login">
+              <a href="/login" style={{ textDecoration: "underline" }}>
                 Already have an account?
                 <br />
                 Login here!

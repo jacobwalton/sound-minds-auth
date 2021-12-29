@@ -167,6 +167,7 @@ input:focus {
 }
 
 .redirect {
+  font-family: var(--primary-font);
   color: grey;
   text-align: center;
   margin: 10px;

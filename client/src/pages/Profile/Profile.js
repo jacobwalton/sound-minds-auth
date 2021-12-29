@@ -8,7 +8,9 @@ const Profile = () => {
   return (
     <div className="profileContainer">
       <div className="header">
-        <Colors />
+        <div id="colors">
+          <Colors />
+        </div>
 
         <h1>{user.username}</h1>
       </div>

@@ -21,6 +21,12 @@
   top: 50px;
   width: 350px;
   height: 5px;
+  left: -10px;
+}
+
+.colors {
+  position: relative;
+  left: -20px;
 }
 
 .aboutText {
@@ -169,6 +175,7 @@ input:focus {
 }
 
 .redirect {
+  font-family: var(--primary-font);
   color: grey;
   text-align: center;
   margin: 10px;

@@ -17,7 +17,7 @@ const SongDetails = (props) => {
         console.log("Track: ", track);
         setTrackLoading(false);
       });
-  }, []);
+  }, [track, trackId]);
 
   return (
     <div>
@@ -26,9 +26,12 @@ const SongDetails = (props) => {
           <img
             className="album-img"
             src={track.album.cover_xl}
-            alt={track.title}
+            alt={`${track.title} cover art`}
           />
-          <Colors id="colors" />
+          <div id="colors">
+            <Colors />
+          </div>
+
           <div className="track-details">
             <h1 id="title">{track.title}</h1>
             <p id="artist-name">{track.artist.name}</p>
@@ -37,9 +40,20 @@ const SongDetails = (props) => {
             <br />
             <p id="date">{track.album.release_date.substr(0, 4)}</p>
             <br />
-            <a href="https://www.deezer.com/artist/4495513" target="_blank">
+            <a
+              href="https://www.deezer.com/artist/4495513"
+              rel="noreferrer"
+              target="_blank"
+              id="view-more"
+            >
               See more from {track.artist.name}
+              <img
+                id="artist-pic"
+                src={track.artist.picture}
+                alt={`${track.artist.name} icon`}
+              />
             </a>
+
             <audio
               id="audioPreview"
               src={track.preview}

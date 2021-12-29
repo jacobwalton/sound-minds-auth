@@ -41,7 +41,7 @@ function App() {
     <UserContext.Provider value={{ username, setUsername, email, setEmail }}>
       <BrowserRouter>
         {/* {username && ( */}
-        <div className="nav">
+        <div>
           <div className="nav">
             {" "}
             <Link to="/search">

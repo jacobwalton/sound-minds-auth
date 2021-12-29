@@ -12,6 +12,7 @@
 .nav {
   z-index: 5;
   opacity: 90%;
+  top: -10px;
 }
 
 nav:hover {

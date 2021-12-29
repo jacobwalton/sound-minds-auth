@@ -10,7 +10,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const secret = process.env.REACT_APP_JWT_SECRET;
 
-const port = process.env.PORT || 5000;
+//TODO: BEFORE DEPLOYING, remove line below and replace with "const port = process.env.PORT || 5000;"
+const port = 5000;
 const app = express();
 
 //Connects to db

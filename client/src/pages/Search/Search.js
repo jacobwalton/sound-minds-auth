@@ -114,15 +114,7 @@ const Search = () => {
             </div>
           ))
         ) : (
-          <marquee
-            className="noSearch"
-            direction="down"
-            width="250"
-            height="200"
-            behavior="alternate"
-          >
-            <marquee behavior="alternate">Sound Off!</marquee>
-          </marquee>
+          <h1 className="noSearch">Sound Off!</h1>
         )}
       </div>
     </div>
