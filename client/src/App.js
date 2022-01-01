@@ -63,11 +63,12 @@ function App() {
             </Link>
             <Link to="/favorites">
               <div className="favorites-nav">
-                <img
+                🔥
+                {/* <img
                   className="icon fav-icon"
                   src={star}
                   alt="favorites icon"
-                />
+                /> */}
               </div>
             </Link>
             <Link to="" onClick={() => logout()}>

@@ -18,7 +18,7 @@
 }
 
 #colors .box {
-  height: 70px;
+  height: 66.5px;
 }
 
 .track-details {
@@ -76,6 +76,37 @@ a {
 
 #artist-pic:hover {
   filter: brightness(0.6);
+}
+#bottom-col {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.addFav {
+  width: fit-content;
+  display: inline;
+  margin-top: -40px;
+}
+button {
+  background: var(--sky-blue);
+  outline: none;
+  border: none;
+  border-radius: 100%;
+  padding: 6px;
+  transition: all 0.2s;
+  text-align: center;
+  font-family: var(--primary-font);
+  font-weight: 500;
+  width: fit-content;
+  font-size: 24px;
+}
+button:hover {
+  background: #8bb3ca;
+}
+button:active {
+  transform: translate(1px, 1px);
+
+  background: #b95d46;
 }
 
 #audioPreview {

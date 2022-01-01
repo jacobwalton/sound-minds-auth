@@ -72,6 +72,7 @@ a {
   height: 100px;
   background: var(--midnight);
   transition: all 0.1s linear;
+  font-size: 70px;
 }
 .logout-nav {
   display: flex;

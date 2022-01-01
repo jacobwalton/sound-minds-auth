@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const Search = () => {
   const [results, setResults] = useState([]);
+  const [message, setMessage] = useState("Sound Off!");
 
   const [searchParam, setSearchParam] = useState("");
 
@@ -38,6 +39,7 @@ const Search = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setMessage("Loading...");
     fetchData();
   };
 
@@ -114,7 +116,7 @@ const Search = () => {
             </div>
           ))
         ) : (
-          <h1 className="noSearch">Sound Off!</h1>
+          <h1 className="noSearch">{message}</h1>
         )}
       </div>
     </div>

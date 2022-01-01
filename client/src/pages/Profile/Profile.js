@@ -5,6 +5,7 @@ import Colors from "../../components/Colors/Colors";
 
 const Profile = () => {
   const user = useContext(UserContext);
+
   return (
     <div className="profileContainer">
       <div className="header">

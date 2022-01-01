@@ -6,12 +6,13 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
+import Favorite from "./models/favorite.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const secret = process.env.REACT_APP_JWT_SECRET;
 
 //TODO: BEFORE DEPLOYING, remove line below and replace with "const port = process.env.PORT || 5000;"
-const port = 5000;
+const PORT = 5000;
 const app = express();
 
 //Connects to db
@@ -31,7 +32,7 @@ app.use(
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
-//Auth routes
+//Auth routes----
 //Log In
 app.get("/api/user", (req, res) => {
   const tokenData = jwt.verify(
@@ -110,6 +111,17 @@ app.post("/api/logout", (req, res) => {
   window.location = "/";
 });
 
-app.listen(port, () => {
-  console.log(`Running at http://localhost:${port} 🚀`);
+//Favorite Routes -------------
+app.post("/api/favoriteCount", (req, res) => {
+  //Find info from Favorite Collection by trackId
+  Favorite.find({ trackId: req.body.trackId }).exec((err, favorite) => {
+    if (err) {
+      return res.status(400).send(err);
+    }
+    res.status(200).json({ success: true, favoriteCount: favorite.length });
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Running at http://localhost:${PORT} 🚀`);
 });
