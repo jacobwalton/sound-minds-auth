@@ -7,6 +7,8 @@ const img =
   "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-eye-9.png";
 
 const Login = () => {
+  document.title = `Log In`;
+
   const [username, setUsername] = useState("");
 
   // eslint-disable-next-line

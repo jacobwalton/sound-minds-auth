@@ -14,6 +14,7 @@ const Search = () => {
 
   const handleChange = (e) => {
     setSearchParam(e.target.value);
+    document.title = `Search: ${searchParam}`;
   };
 
   const fetchData = () => {
@@ -38,6 +39,7 @@ const Search = () => {
   };
 
   const handleSearch = (e) => {
+    document.title = `Search: ${searchParam}`;
     e.preventDefault();
     setMessage("Loading...");
     fetchData();

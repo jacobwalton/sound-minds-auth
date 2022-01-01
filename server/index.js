@@ -112,9 +112,10 @@ app.post("/api/logout", (req, res) => {
 });
 
 //Favorite Routes -------------
+//Checks number of favorites
 app.post("/api/favoriteCount", (req, res) => {
   //Find info from Favorite Collection by trackId
-  Favorite.find({ "trackId": req.body.trackId }).exec((err, favorite) => {
+  Favorite.find({ trackId: req.body.trackId }).exec((err, favorite) => {
     if (err) {
       return res.status(400).send(err);
     }
@@ -122,21 +123,51 @@ app.post("/api/favoriteCount", (req, res) => {
   });
 });
 
+//Check if song is favorited already
 app.post("/api/favorited", (req, res) => {
   //Find info from Favorite Collection by trackId & user (favoritedBy)
-  Favorite.find({ "trackId": req.body.trackId, "favoritedBy": req.body.favoritedBy }).exec((err, favorite) => {
+  Favorite.find({
+    trackId: req.body.trackId,
+    favoritedBy: req.body.favoritedBy,
+  }).exec((err, favorite) => {
     if (err) {
-       return res.status(400).send(err);
-    } 
+      return res.status(400).send(err);
+    }
     let alreadyFavorited = false;
-    if(favorite.length !== 0 ){
+    if (favorite.length !== 0) {
       alreadyFavorited = true;
     }
-    res.status(200).json({success:true, favorited:alreadyFavorited})
+    res.status(200).json({ success: true, favorited: alreadyFavorited });
   });
 });
 
+//Add favorite
+app.post("/api/addFavorite", (req, res) => {
+  //Writes Track info to favorites collection
+  const favorite = new Favorite(req.body);
+  favorite.save((err, doc) => {
+    if (err) {
+      res.json({ success: false, err });
+    } else {
+      return res.status(200).json({ success: true });
+    }
+  });
+});
 
+//Remove favorite
+app.post("/api/removeFavorite", (req, res) => {
+  //Writes Track info to favorites collection
+  Favorite.findOneAndDelete({
+    trackId: req.body.trackId,
+    favoritedBy: req.body.favoritedBy,
+  }).exec((err, doc) => {
+    if (err) {
+      return res.status(400).json({ success: false, err });
+    } else {
+      res.status(200).json({ success: true }, doc);
+    }
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Running at http://localhost:${PORT} 🚀`);

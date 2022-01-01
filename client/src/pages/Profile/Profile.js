@@ -5,6 +5,7 @@ import Colors from "../../components/Colors/Colors";
 
 const Profile = () => {
   const user = useContext(UserContext);
+  document.title = `${user.username}`;
 
   return (
     <div className="profileContainer">

@@ -7,6 +7,8 @@ const img =
   "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-eye-9.png";
 
 const Signup = () => {
+  document.title = `Sign Up`;
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

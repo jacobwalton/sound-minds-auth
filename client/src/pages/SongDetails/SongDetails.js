@@ -29,29 +29,31 @@ const SongDetails = (props) => {
         setTrackArtist(res.artist.name);
         setTrackCover(res.album.cover);
         setTrackAlbum(res.album.name);
-
+        document.title = `${res.title} - ${res.artist.name}`;
         setTrackLoading(false);
       });
   }, []);
+  const trackInfo = {
+    favoritedBy: user.username,
+    trackId: trackId,
+    trackTitle: trackTitle,
+    trackArtist: trackArtist,
+    trackCover: trackCover,
+    trackAlbum: trackAlbum,
+  };
 
   useEffect(() => {
-    const trackInfo = {
-      favoritedBy: user,
-      trackId: trackId,
-      trackTitle: trackTitle,
-      trackArtist: trackArtist,
-      trackCover: trackCover,
-      trackAlbum: trackAlbum,
-    };
-    axios.post("/api/favoriteCount", trackInfo).then((res) => {
-      if (res.data.success) {
-        setFavoriteCount(res.data.favoriteCount);
-      } else {
-        console.error("Couldn't fetch number of favorites");
-      }
-    });
+    axios
+      .post("http://localhost:5000/api/favoriteCount", trackInfo)
+      .then((res) => {
+        if (res.data.success) {
+          setFavoriteCount(res.data.favoriteCount);
+        } else {
+          console.error("Couldn't fetch number of favorites");
+        }
+      });
 
-    axios.post("/api/favorited", trackInfo).then((res) => {
+    axios.post("http://localhost:5000/api/favorited", trackInfo).then((res) => {
       if (res.data.success) {
         setFavorited(res.data.favorited);
       } else {
@@ -59,7 +61,33 @@ const SongDetails = (props) => {
       }
     });
   }, []);
-
+  const toggleFavorite = () => {
+    if (favorited) {
+      //Removing favorite
+      axios
+        .post("http://localhost:5000/api/removeFavorite", trackInfo)
+        .then((res) => {
+          if (res.data.success) {
+            setFavoriteCount(favoriteCount - 1);
+            setFavorited(!favorited);
+          } else {
+            console.error("Failed removing track from favorites");
+          }
+        });
+    } else {
+      //Adding favorite
+      axios
+        .post("http://localhost:5000/api/addFavorite", trackInfo)
+        .then((res) => {
+          if (res.data.success) {
+            setFavoriteCount(favoriteCount + 1);
+            setFavorited(!favorited);
+          } else {
+            console.error("Failed adding track to favorites");
+          }
+        });
+    }
+  };
   return (
     <div>
       {!trackLoading ? (
@@ -96,7 +124,7 @@ const SongDetails = (props) => {
                 />
               </a>
               <div className="addFav">
-                <button>
+                <button onClick={toggleFavorite}>
                   {favorited ? "Remove 🔥" : "Add 🔥"}
                   {favoriteCount}
                 </button>
