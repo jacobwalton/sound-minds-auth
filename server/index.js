@@ -114,13 +114,29 @@ app.post("/api/logout", (req, res) => {
 //Favorite Routes -------------
 app.post("/api/favoriteCount", (req, res) => {
   //Find info from Favorite Collection by trackId
-  Favorite.find({ trackId: req.body.trackId }).exec((err, favorite) => {
+  Favorite.find({ "trackId": req.body.trackId }).exec((err, favorite) => {
     if (err) {
       return res.status(400).send(err);
     }
     res.status(200).json({ success: true, favoriteCount: favorite.length });
   });
 });
+
+app.post("/api/favorited", (req, res) => {
+  //Find info from Favorite Collection by trackId & user (favoritedBy)
+  Favorite.find({ "trackId": req.body.trackId, "favoritedBy": req.body.favoritedBy }).exec((err, favorite) => {
+    if (err) {
+       return res.status(400).send(err);
+    } 
+    let alreadyFavorited = false;
+    if(favorite.length !== 0 ){
+      alreadyFavorited = true;
+    }
+    res.status(200).json({success:true, favorited:alreadyFavorited})
+  });
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Running at http://localhost:${PORT} 🚀`);

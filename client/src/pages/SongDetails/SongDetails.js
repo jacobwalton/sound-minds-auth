@@ -7,8 +7,13 @@ import axios from "axios";
 const SongDetails = (props) => {
   const [trackLoading, setTrackLoading] = useState(true);
   let trackId = props.match.params.trackId;
-  const [track, setTrack] = useState([]);
+  const [track, setTrack] = useState();
+  const [trackTitle, setTrackTitle] = useState();
+  const [trackArtist, setTrackArtist] = useState();
+  const [trackCover, setTrackCover] = useState();
+  const [trackAlbum, setTrackAlbum] = useState();
   const user = useContext(UserContext);
+  const [favorited, setFavorited] = useState(false);
 
   const [favoriteCount, setFavoriteCount] = useState(0);
 
@@ -20,25 +25,37 @@ const SongDetails = (props) => {
       .then((res) => {
         console.log(res);
         setTrack(res);
-        console.log("Track: ", track);
+        setTrackTitle(res.title);
+        setTrackArtist(res.artist.name);
+        setTrackCover(res.album.cover);
+        setTrackAlbum(res.album.name);
+
         setTrackLoading(false);
       });
-  }, [track, trackId]);
+  }, []);
 
   useEffect(() => {
     const trackInfo = {
-      // favoritedBy: user,
-      // trackId: trackId,
-      // trackTitle: track.title,
-      // trackArtist: track.artist.name,
-      // trackCover: track.album.cover,
-      // trackAlbum: track.album.name,
+      favoritedBy: user,
+      trackId: trackId,
+      trackTitle: trackTitle,
+      trackArtist: trackArtist,
+      trackCover: trackCover,
+      trackAlbum: trackAlbum,
     };
     axios.post("/api/favoriteCount", trackInfo).then((res) => {
       if (res.data.success) {
         setFavoriteCount(res.data.favoriteCount);
       } else {
         console.error("Couldn't fetch number of favorites");
+      }
+    });
+
+    axios.post("/api/favorited", trackInfo).then((res) => {
+      if (res.data.success) {
+        setFavorited(res.data.favorited);
+      } else {
+        console.error("Could not get favorite info");
       }
     });
   }, []);
@@ -79,7 +96,10 @@ const SongDetails = (props) => {
                 />
               </a>
               <div className="addFav">
-                <button>🔥{favoriteCount}</button>
+                <button>
+                  {favorited ? "Remove 🔥" : "Add 🔥"}
+                  {favoriteCount}
+                </button>
               </div>
             </div>
             <audio
