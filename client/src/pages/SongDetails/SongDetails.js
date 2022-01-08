@@ -75,33 +75,18 @@ const SongDetails = (props) => {
     let arr = user.favorites;
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].trackId == trackId) {
-        axios
-          .post("http://localhost:5000/api/removeFavorite", trackInfo)
-          .then((res) => {
-            if (res.data.success) {
-              // setFavoriteCount(favoriteCount - 1);
-              // setFavorited(!favorited);
-            } else {
-              console.error("Failed removing track from favorites");
-            }
-          });
+        axios.post("http://localhost:5000/api/removeFavorite", trackInfo);
+
+        window.location.reload();
         return;
       }
     }
     {
       //Adding favorite
-      axios
-        .post("http://localhost:5000/api/addFavorite", trackInfo)
-        .then((res) => {
-          if (res.data.success) {
-            // setFavoriteCount(favoriteCount + 1);
-            // setFavorited(!favorited);
-          } else {
-            console.error("Failed adding track to favorites");
-          }
-        });
+      axios.post("http://localhost:5000/api/addFavorite", trackInfo);
+
+      window.location.reload();
     }
-    window.location.reload();
   };
   return (
     <div>
