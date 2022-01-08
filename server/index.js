@@ -185,20 +185,29 @@ app.post("/api/addFavorite", (req, res) => {
 
 //Remove favorite
 app.post("/api/removeFavorite", (req, res) => {
-  //Writes Track info to favorites collection
-
   let user = User.findOne({ username: req.body.favoritedBy }).exec(
     (err, doc) => {
-      if (!doc.favorites.includes(req.body.trackId)) {
-        console.log("Song not in favorites");
-        return res.status(200).json({ message: "Song not in favorites" });
-      }
       let arr = doc.favorites;
       for (let i = 0; i < arr.length; i++) {
-        if (arr[i] == req.body.trackId) {
+        if (arr[i].trackId == req.body.trackId) {
           arr.splice(i, 1);
+          console.log("Song successfully removed from favorites");
+        } else {
+          console.log("Song not in favorites");
+          return res.status(200).json({ message: "Song not in favorites" });
         }
       }
+      ///////
+      // if (!doc.favorites.includes(req.body.trackId)) {
+      //   console.log("Song not in favorites");
+      //   return res.status(200).json({ message: "Song not in favorites" });
+      // }
+      // let arr = doc.favorites;
+      // for (let i = 0; i < arr.length; i++) {
+      //   if (arr[i] == req.body.trackId) {
+      //     arr.splice(i, 1);
+      //   }
+      // }
       doc.save((err) => {
         if (err) {
           console.error("Failed to remove song to favorites", err);
