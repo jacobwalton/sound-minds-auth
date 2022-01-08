@@ -164,7 +164,7 @@ app.post("/api/removeFavorite", (req, res) => {
     if (err) {
       return res.status(400).json({ success: false, err });
     } else {
-      res.status(200).json({ success: true }, doc);
+      res.status(200).json({ success: true });
     }
   });
 });
