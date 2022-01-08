@@ -7,15 +7,17 @@ import axios from "axios";
 const SongDetails = (props) => {
   const [trackLoading, setTrackLoading] = useState(true);
   let trackId = props.match.params.trackId;
+
   const [track, setTrack] = useState();
   const [trackTitle, setTrackTitle] = useState();
   const [trackArtist, setTrackArtist] = useState();
   const [trackCover, setTrackCover] = useState();
   const [trackAlbum, setTrackAlbum] = useState();
   const user = useContext(UserContext);
-  const [favorited, setFavorited] = useState(false);
+  // const [favorited, setFavorited] = useState(false);
+  let favorited = false;
 
-  const [favoriteCount, setFavoriteCount] = useState(0);
+  // const [favoriteCount, setFavoriteCount] = useState(0);
 
   useEffect(() => {
     fetch(
@@ -28,7 +30,7 @@ const SongDetails = (props) => {
         setTrackTitle(res.title);
         setTrackArtist(res.artist.name);
         setTrackCover(res.album.cover);
-        setTrackAlbum(res.album.name);
+        setTrackAlbum(res.album.title);
         document.title = `${res.title} - ${res.artist.name}`;
         setTrackLoading(false);
       });
@@ -41,9 +43,12 @@ const SongDetails = (props) => {
     trackCover: trackCover,
     trackAlbum: trackAlbum,
   };
+  console.log("trackInfo :>> ", trackInfo);
 
-  if (user.favorites.includes(Number(trackId))) {
-    // setFavorited(true);
+  for (let i = 0; i < user.favorites.length; i++) {
+    if (user.favorites[i].trackId == trackId) {
+      favorited = true;
+    }
   }
 
   // useEffect(() => {
@@ -91,6 +96,7 @@ const SongDetails = (props) => {
           }
         });
     }
+    window.location.reload();
   };
   return (
     <div>
@@ -129,9 +135,7 @@ const SongDetails = (props) => {
               </a>
               <div className="addFav">
                 <button onClick={toggleFavorite}>
-                  {user.favorites.includes(Number(trackId))
-                    ? "Remove 🔥"
-                    : "Add 🔥"}
+                  {favorited ? "Remove 🔥" : "Add 🔥"}
                 </button>
               </div>
             </div>

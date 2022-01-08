@@ -6,7 +6,14 @@ const User = mongoose.model(
     username: { type: String, unique: true, maxLength: 24 },
     email: { type: String, unique: true, trim: true },
     password: { type: String, minLength: 6 },
-    favorites: [{ type: Number, unique: true }],
+    favorites: [
+      {
+        trackId: { type: Number, unique: true },
+        trackTitle: { type: String },
+        trackArtist: { type: String },
+        trackCover: { type: String },
+      },
+    ],
   })
 );
 export default User;

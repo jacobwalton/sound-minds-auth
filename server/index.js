@@ -58,7 +58,6 @@ app.post("/api/signup", (req, res) => {
     username,
     email,
     password: hashedPassword,
-    favorites: [0],
   });
   //saves to collection
   user.save().then((userData) => {
@@ -153,14 +152,27 @@ app.post("/api/logout", (req, res) => {
 app.post("/api/addFavorite", (req, res) => {
   User.findOne({ username: req.body.favoritedBy }).exec((err, doc) => {
     //Prevent duplicates
+    for (let i = 0; i < doc.favorites.length; i++) {
+      if (doc.favorites[i].trackId == req.body.trackId) {
+        console.log("Song already added to favorites");
+        return res
+          .status(200)
+          .json({ message: "Song already added to favorites" });
+      }
+    }
     if (doc.favorites.includes(req.body.trackId)) {
       console.log("Song already added to favorites");
       return res
         .status(200)
         .json({ message: "Song already added to favorites" });
     }
-
-    doc.favorites.push(Number(req.body.trackId));
+    //Pushes data to collection
+    doc.favorites.push({
+      trackId: Number(req.body.trackId),
+      trackTitle: String(req.body.trackTitle),
+      trackArtist: String(req.body.trackArtist),
+      trackCover: String(req.body.trackCover),
+    });
     doc.save((err) => {
       if (err) {
         console.error("Failed to add song to favorites", err);
@@ -187,7 +199,6 @@ app.post("/api/removeFavorite", (req, res) => {
           arr.splice(i, 1);
         }
       }
-
       doc.save((err) => {
         if (err) {
           console.error("Failed to remove song to favorites", err);
