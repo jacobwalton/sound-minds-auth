@@ -42,34 +42,38 @@ const SongDetails = (props) => {
     trackAlbum: trackAlbum,
   };
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:5000/api/favoriteCount", trackInfo)
-      .then((res) => {
-        if (res.data.success) {
-          setFavoriteCount(res.data.favoriteCount);
-        } else {
-          console.error("Couldn't fetch number of favorites");
-        }
-      });
+  if (user.favorites.includes(Number(trackId))) {
+    // setFavorited(true);
+  }
 
-    axios.post("http://localhost:5000/api/favorited", trackInfo).then((res) => {
-      if (res.data.success) {
-        setFavorited(res.data.favorited);
-      } else {
-        console.error("Could not get favorite info");
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:5000/api/favoriteCount", trackInfo)
+  //     .then((res) => {
+  //       if (res.data.success) {
+  //         setFavoriteCount(res.data.favoriteCount);
+  //       } else {
+  //         console.error("Couldn't fetch number of favorites");
+  //       }
+  //     });
+
+  //   axios.post("http://localhost:5000/api/favorited", trackInfo).then((res) => {
+  //     if (res.data.success) {
+  //       setFavorited(res.data.favorited);
+  //     } else {
+  //       console.error("Could not get favorite info");
+  //     }
+  //   });
+  // }, []);
   const toggleFavorite = () => {
-    if (favorited) {
+    if (user.favorites.includes(Number(trackId))) {
       //Removing favorite
       axios
         .post("http://localhost:5000/api/removeFavorite", trackInfo)
         .then((res) => {
           if (res.data.success) {
-            setFavoriteCount(favoriteCount - 1);
-            setFavorited(!favorited);
+            // setFavoriteCount(favoriteCount - 1);
+            // setFavorited(!favorited);
           } else {
             console.error("Failed removing track from favorites");
           }
@@ -80,8 +84,8 @@ const SongDetails = (props) => {
         .post("http://localhost:5000/api/addFavorite", trackInfo)
         .then((res) => {
           if (res.data.success) {
-            setFavoriteCount(favoriteCount + 1);
-            setFavorited(!favorited);
+            // setFavoriteCount(favoriteCount + 1);
+            // setFavorited(!favorited);
           } else {
             console.error("Failed adding track to favorites");
           }
@@ -125,8 +129,9 @@ const SongDetails = (props) => {
               </a>
               <div className="addFav">
                 <button onClick={toggleFavorite}>
-                  {favorited ? "Remove 🔥" : "Add 🔥"}
-                  {favoriteCount}
+                  {user.favorites.includes(Number(trackId))
+                    ? "Remove 🔥"
+                    : "Add 🔥"}
                 </button>
               </div>
             </div>

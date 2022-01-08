@@ -9,6 +9,10 @@
   --header-font: "Playfair Display", serif;
   --primary-font: "Josefin Slab", serif;
 }
+*::selection {
+  background-color: #d9765d83;
+}
+
 .nav {
   z-index: 5;
   opacity: 90%;
