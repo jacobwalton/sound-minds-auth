@@ -6,7 +6,6 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
-// import Favorite from "./models/favorite.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const secret = process.env.REACT_APP_JWT_SECRET;
@@ -119,35 +118,6 @@ app.post("/api/logout", (req, res) => {
 });
 
 //Favorite Routes -------------
-//Checks number of favorites
-// app.post("/api/favoriteCount", (req, res) => {
-//   //Find info from Favorite Collection by trackId
-//   Favorite.find({ trackId: req.body.trackId }).exec((err, favorite) => {
-//     if (err) {
-//       return res.status(400).send(err);
-//     }
-//     res.status(200).json({ success: true, favoriteCount: favorite.length });
-//   });
-// });
-
-//Check if song is favorited already
-// app.post("/api/favorited", (req, res) => {
-//   //Find info from Favorite Collection by trackId & user (favoritedBy)
-//   Favorite.find({
-//     trackId: req.body.trackId,
-//     favoritedBy: req.body.favoritedBy,
-//   }).exec((err, favorite) => {
-//     if (err) {
-//       return res.status(400).send(err);
-//     }
-//     let alreadyFavorited = false;
-//     if (favorite.length !== 0) {
-//       alreadyFavorited = true;
-//     }
-//     res.status(200).json({ success: true, favorited: alreadyFavorited });
-//   });
-// });
-
 //Add favorite
 app.post("/api/addFavorite", (req, res) => {
   User.findOne({ username: req.body.favoritedBy }).exec((err, doc) => {
@@ -160,12 +130,7 @@ app.post("/api/addFavorite", (req, res) => {
           .json({ message: "Song already added to favorites" });
       }
     }
-    if (doc.favorites.includes(req.body.trackId)) {
-      console.log("Song already added to favorites");
-      return res
-        .status(200)
-        .json({ message: "Song already added to favorites" });
-    }
+
     //Pushes data to collection
     doc.favorites.push({
       trackId: Number(req.body.trackId),
@@ -185,54 +150,18 @@ app.post("/api/addFavorite", (req, res) => {
 
 //Remove favorite
 app.post("/api/removeFavorite", (req, res) => {
-  let user = User.findOne({ username: req.body.favoritedBy }).exec(
-    (err, doc) => {
-      let arr = doc.favorites;
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].trackId == req.body.trackId) {
-          arr.splice(i, 1);
-          console.log("Song successfully removed from favorites");
-        } else {
-          console.log("Song not in favorites");
-          return res.status(200).json({ message: "Song not in favorites" });
-        }
-      }
-      ///////
-      // if (!doc.favorites.includes(req.body.trackId)) {
-      //   console.log("Song not in favorites");
-      //   return res.status(200).json({ message: "Song not in favorites" });
-      // }
-      // let arr = doc.favorites;
-      // for (let i = 0; i < arr.length; i++) {
-      //   if (arr[i] == req.body.trackId) {
-      //     arr.splice(i, 1);
-      //   }
-      // }
-      doc.save((err) => {
-        if (err) {
-          console.error("Failed to remove song to favorites", err);
-        } else {
-          console.log(`Succefully removed song to favorites`);
-        }
-      });
-    }
-  );
+  User.findOne({ username: req.body.favoritedBy }).exec((err, doc) => {
+    let arr = doc.favorites;
 
-  // let user = User.findOne({ username: req.body.favoritedBy }).updateOne(
-  //   { username: req.body.favoritedBy },
-  //   { $pull: { favorites: Number(req.body.trackId) } }
-  // );
-  //OLD//////////
-  // Favorite.findOneAndDelete({
-  //   trackId: req.body.trackId,
-  //   favoritedBy: req.body.favoritedBy,
-  // }).exec((err, doc) => {
-  //   if (err) {
-  //     return res.status(400).json({ success: false, err });
-  //   } else {
-  //     res.status(200).json({ success: true });
-  //   }
-  // });
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].trackId == req.body.trackId) {
+        console.log(doc.favorites);
+        doc.favorites.splice(i, 1);
+        doc.save();
+        return res.status(200).json({ message: "Song removed favorites" });
+      }
+    }
+  });
 });
 
 app.listen(PORT, () => {

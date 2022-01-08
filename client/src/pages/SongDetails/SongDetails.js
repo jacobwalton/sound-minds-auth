@@ -29,7 +29,7 @@ const SongDetails = (props) => {
         setTrack(res);
         setTrackTitle(res.title);
         setTrackArtist(res.artist.name);
-        setTrackCover(res.album.cover);
+        setTrackCover(res.album.cover_xl);
         setTrackAlbum(res.album.title);
         document.title = `${res.title} - ${res.artist.name}`;
         setTrackLoading(false);
