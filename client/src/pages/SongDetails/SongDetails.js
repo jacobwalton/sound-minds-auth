@@ -7,15 +7,17 @@ import axios from "axios";
 const SongDetails = (props) => {
   const [trackLoading, setTrackLoading] = useState(true);
   let trackId = props.match.params.trackId;
+
   const [track, setTrack] = useState();
   const [trackTitle, setTrackTitle] = useState();
   const [trackArtist, setTrackArtist] = useState();
   const [trackCover, setTrackCover] = useState();
   const [trackAlbum, setTrackAlbum] = useState();
   const user = useContext(UserContext);
-  const [favorited, setFavorited] = useState(false);
+  // const [favorited, setFavorited] = useState(false);
+  let favorited = false;
 
-  const [favoriteCount, setFavoriteCount] = useState(0);
+  // const [favoriteCount, setFavoriteCount] = useState(0);
 
   useEffect(() => {
     fetch(
@@ -27,8 +29,8 @@ const SongDetails = (props) => {
         setTrack(res);
         setTrackTitle(res.title);
         setTrackArtist(res.artist.name);
-        setTrackCover(res.album.cover);
-        setTrackAlbum(res.album.name);
+        setTrackCover(res.album.cover_xl);
+        setTrackAlbum(res.album.title);
         document.title = `${res.title} - ${res.artist.name}`;
         setTrackLoading(false);
       });
@@ -41,51 +43,49 @@ const SongDetails = (props) => {
     trackCover: trackCover,
     trackAlbum: trackAlbum,
   };
+  console.log("trackInfo :>> ", trackInfo);
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:5000/api/favoriteCount", trackInfo)
-      .then((res) => {
-        if (res.data.success) {
-          setFavoriteCount(res.data.favoriteCount);
-        } else {
-          console.error("Couldn't fetch number of favorites");
-        }
-      });
+  for (let i = 0; i < user.favorites.length; i++) {
+    if (user.favorites[i].trackId == trackId) {
+      favorited = true;
+    }
+  }
 
-    axios.post("http://localhost:5000/api/favorited", trackInfo).then((res) => {
-      if (res.data.success) {
-        setFavorited(res.data.favorited);
-      } else {
-        console.error("Could not get favorite info");
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:5000/api/favoriteCount", trackInfo)
+  //     .then((res) => {
+  //       if (res.data.success) {
+  //         setFavoriteCount(res.data.favoriteCount);
+  //       } else {
+  //         console.error("Couldn't fetch number of favorites");
+  //       }
+  //     });
+
+  //   axios.post("http://localhost:5000/api/favorited", trackInfo).then((res) => {
+  //     if (res.data.success) {
+  //       setFavorited(res.data.favorited);
+  //     } else {
+  //       console.error("Could not get favorite info");
+  //     }
+  //   });
+  // }, []);
   const toggleFavorite = () => {
-    if (favorited) {
-      //Removing favorite
-      axios
-        .post("http://localhost:5000/api/removeFavorite", trackInfo)
-        .then((res) => {
-          if (res.data.success) {
-            setFavoriteCount(favoriteCount - 1);
-            setFavorited(!favorited);
-          } else {
-            console.error("Failed removing track from favorites");
-          }
-        });
-    } else {
+    //Removing favorite
+    let arr = user.favorites;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].trackId == trackId) {
+        axios.post("http://localhost:5000/api/removeFavorite", trackInfo);
+
+        window.location.reload();
+        return;
+      }
+    }
+    {
       //Adding favorite
-      axios
-        .post("http://localhost:5000/api/addFavorite", trackInfo)
-        .then((res) => {
-          if (res.data.success) {
-            setFavoriteCount(favoriteCount + 1);
-            setFavorited(!favorited);
-          } else {
-            console.error("Failed adding track to favorites");
-          }
-        });
+      axios.post("http://localhost:5000/api/addFavorite", trackInfo);
+
+      window.location.reload();
     }
   };
   return (
@@ -126,7 +126,6 @@ const SongDetails = (props) => {
               <div className="addFav">
                 <button onClick={toggleFavorite}>
                   {favorited ? "Remove 🔥" : "Add 🔥"}
-                  {favoriteCount}
                 </button>
               </div>
             </div>

@@ -5,7 +5,7 @@ import Colors from "../../components/Colors/Colors";
 
 const Profile = () => {
   const user = useContext(UserContext);
-  document.title = `${user.username}`;
+  document.title = `${user.username}'s Profile`;
 
   return (
     <div className="profileContainer">
@@ -18,9 +18,12 @@ const Profile = () => {
       </div>
       <div className="userDetails">
         <ul className="detailList">
+          <li>
+            Email Address: <span className="userInfo">{user.email}</span>
+          </li>
           <li>Member since: </li>
           <li>Number of comments: </li>
-          <li>Number of favorites: </li>
+          <li>Number of favorites: {user.favorites.length}</li>
         </ul>
       </div>
       <div className="bottom"></div>

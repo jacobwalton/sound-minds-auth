@@ -18,6 +18,7 @@ import axios from "axios";
 function App() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     axios
@@ -25,6 +26,7 @@ function App() {
       .then((res) => {
         setEmail(res.data.email);
         setUsername(res.data.username);
+        setFavorites(res.data.favorites);
       });
   }, []);
 
@@ -38,7 +40,16 @@ function App() {
     window.location = "/";
   };
   return (
-    <UserContext.Provider value={{ username, setUsername, email, setEmail }}>
+    <UserContext.Provider
+      value={{
+        username,
+        setUsername,
+        email,
+        setEmail,
+        favorites,
+        setFavorites,
+      }}
+    >
       <BrowserRouter>
         {/* {username && ( */}
         <div>

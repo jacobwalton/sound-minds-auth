@@ -31,3 +31,7 @@
   transform: rotate(0deg) !important;
   left: -10px;
 }
+
+.userInfo {
+  text-decoration: underline;
+}
