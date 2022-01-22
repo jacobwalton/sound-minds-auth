@@ -34,7 +34,7 @@ const SongDetails = (props) => {
         document.title = `${res.title} - ${res.artist.name}`;
         setTrackLoading(false);
       });
-  }, []);
+  }, [trackId]);
   const trackInfo = {
     favoritedBy: user.username,
     trackId: trackId,
@@ -46,47 +46,34 @@ const SongDetails = (props) => {
   console.log("trackInfo :>> ", trackInfo);
 
   for (let i = 0; i < user.favorites.length; i++) {
-    if (user.favorites[i].trackId == trackId) {
+    if (user.favorites[i].trackId === trackId) {
       favorited = true;
     }
   }
-
-  // useEffect(() => {
-  //   axios
-  //     .post("http://localhost:5000/api/favoriteCount", trackInfo)
-  //     .then((res) => {
-  //       if (res.data.success) {
-  //         setFavoriteCount(res.data.favoriteCount);
-  //       } else {
-  //         console.error("Couldn't fetch number of favorites");
-  //       }
-  //     });
-
-  //   axios.post("http://localhost:5000/api/favorited", trackInfo).then((res) => {
-  //     if (res.data.success) {
-  //       setFavorited(res.data.favorited);
-  //     } else {
-  //       console.error("Could not get favorite info");
-  //     }
-  //   });
-  // }, []);
+  // Create state for comments
+  const [comment, setComment] = useState("");
+  // useEffect to get all commnets where trackId matches
+  // handleChange func for adding new comments
+  const handleChange = (e) => {
+    setComment(e.currentTarget.value);
+  };
+  // onSubmit func to post new comments
   const toggleFavorite = () => {
     //Removing favorite
     let arr = user.favorites;
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].trackId == trackId) {
+      if (arr[i].trackId === trackId) {
         axios.post("http://localhost:5000/api/removeFavorite", trackInfo);
 
         window.location.reload();
         return;
       }
     }
-    {
-      //Adding favorite
-      axios.post("http://localhost:5000/api/addFavorite", trackInfo);
 
-      window.location.reload();
-    }
+    //Adding favorite
+    axios.post("http://localhost:5000/api/addFavorite", trackInfo);
+
+    window.location.reload();
   };
   return (
     <div>
@@ -142,6 +129,21 @@ const SongDetails = (props) => {
       ) : (
         <h1 className="loading">Loading...</h1>
       )}
+      {/* COMMENT SECTION */}
+      <div className="commentSection">
+        <h2 id="commentHeader">Sound Off!</h2>
+
+        <form id="newComment">
+          <textArea
+            onChange={handleChange}
+            id="commentText"
+            placeholder={`What do you think?`}
+            value={comment}
+            contenteditable
+          ></textArea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
 };

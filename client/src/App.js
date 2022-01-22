@@ -9,6 +9,7 @@ import SongDetails from "../src/pages/SongDetails/SongDetails";
 // eslint-disable-next-line
 import Nav from "./components/Nav/Nav";
 import UserContext from "./helpers/UserContext";
+// eslint-disable-next-line
 import star from "./assets/star_icon.png";
 import logoutImg from "./assets/logout_icon.png";
 import search from "./assets/search_icon.png";

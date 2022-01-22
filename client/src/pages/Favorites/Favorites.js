@@ -8,6 +8,7 @@ const Favorites = () => {
   useEffect(() => {
     setFavoriteTracks(user.favorites);
   }, [user]);
+  // eslint-disable-next-line
   const [message, setMessage] = useState("No Favorites");
   document.title = `Favorites`;
 

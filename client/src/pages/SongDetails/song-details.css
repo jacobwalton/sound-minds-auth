@@ -147,3 +147,40 @@ audio::-webkit-media-controls-panel {
     transform: translateY(0px);
   }
 }
+/* Comment css */
+#commentHeader {
+  font-family: var(--primary-font);
+}
+
+.commentSection {
+  color: var(--midnight);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.commentSection button {
+  position: relative;
+  top: -21px;
+  height: 55px;
+  border-radius: 0px 8px 8px 0px;
+  box-shadow: -3px 0px 3px rgba(0, 0, 0, 0.322);
+  font-weight: bold;
+}
+
+#newComment {
+  width: 100%;
+}
+
+#commentText {
+  outline: none;
+  border: none;
+  border-radius: 8px 0px 0px 8px;
+  min-height: 50px;
+  font-weight: bold;
+  width: 80%;
+  resize: none;
+  font-size: 15px;
+  color: var(--midnight);
+}
