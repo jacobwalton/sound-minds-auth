@@ -50,14 +50,35 @@ const SongDetails = (props) => {
       favorited = true;
     }
   }
+
   // Create state for comments
   const [comment, setComment] = useState("");
+  const commentInfo = {
+    content: comment,
+    commentBy: user.username,
+    trackId: trackId,
+  };
+
   // useEffect to get all commnets where trackId matches
   // handleChange func for adding new comments
   const handleChange = (e) => {
     setComment(e.currentTarget.value);
   };
   // onSubmit func to post new comments
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:5000/api/addComment", commentInfo)
+      .then((res) => {
+        if (res.data.success) {
+          window.location.reload();
+        } else {
+          console.error("Something went wrong, couldn't add new comment");
+        }
+      });
+  };
+
   const toggleFavorite = () => {
     //Removing favorite
     let arr = user.favorites;
@@ -133,7 +154,7 @@ const SongDetails = (props) => {
       <div className="commentSection">
         <h2 id="commentHeader">Sound Off!</h2>
 
-        <form id="newComment">
+        <form id="newComment" onSubmit={handleSubmit}>
           <textArea
             onChange={handleChange}
             id="commentText"

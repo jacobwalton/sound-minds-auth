@@ -6,6 +6,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
+import Comment from "./models/comment.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const secret = process.env.REACT_APP_JWT_SECRET;
@@ -160,6 +161,21 @@ app.post("/api/removeFavorite", (req, res) => {
         doc.save();
         return res.status(200).json({ message: "Song removed favorites" });
       }
+    }
+  });
+});
+
+// COMMENT ROUTES
+app.post("/api/addComment", (req, res) => {
+  console.log("ROUTE HIT!");
+  console.log(req.body);
+  const comment = new Comment(req.body);
+
+  comment.save((err, comment) => {
+    if (err) {
+      return res.json({ success: false, err });
+    } else {
+      return res.json({ success: true });
     }
   });
 });

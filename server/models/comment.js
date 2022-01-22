@@ -5,7 +5,7 @@ const Comment = mongoose.model(
   new mongoose.Schema(
     {
       commentBy: { type: String },
-      content: { type: String, required: true, minLength: 1, maxLength: 400 },
+      content: { type: String },
       trackId: { type: Number },
     },
     { timestamps: true }
