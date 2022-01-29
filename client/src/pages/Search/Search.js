@@ -26,12 +26,12 @@ const Search = () => {
     return fetch(baseUrl, {
       method: "GET",
       mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": null,
-        "X-Requested-With": null,
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   "Access-Control-Allow-Origin": "*",
+      //   "Cache-Control": null,
+      //   "X-Requested-With": null,
+      // },
     })
       .then((res) => res.json())
       .then((data) => setResults(data.data))
