@@ -7,7 +7,7 @@ const Search = () => {
 
   const [searchParam, setSearchParam] = useState("");
 
-  const baseUrl = `https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search/?q=${searchParam.replace(
+  const baseUrl = `https://cors-anywhere.herokuapp.com/https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search/?q=${searchParam.replace(
     / /g,
     "%20"
   )}`;
@@ -24,11 +24,11 @@ const Search = () => {
     // console.log(baseUrl);
     // `https://api.allorigins.win/get?url=${encodeURIComponent(baseUrl)}`);
     return fetch(baseUrl, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": "true",
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Credentials": "true",
+      // },
       method: "GET",
       mode: "cors",
     })
