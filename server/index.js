@@ -24,13 +24,14 @@ mongoose
   .catch((err) => console.error(err));
 
 //Middleware
+let origin;
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", req.header("origin"));
-  next();
+  origin = req.header("origin");
 });
 app.use(
   cors({
     credentials: true,
+    "Access-Control-Allow-Origin": origin,
   })
 );
 
