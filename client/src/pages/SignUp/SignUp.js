@@ -43,7 +43,6 @@ const Signup = () => {
         }
 
         console.log("Signup Error:", JSON.stringify(err));
-        console.log(typeof JSON.stringify(err));
       });
   };
 
@@ -64,6 +63,7 @@ const Signup = () => {
           </h1>
         </div>
         <div className="aboutText">
+          {/* TODO: CHANGE LOREM IPSUM TEXT TO SOMETHING ELSE!!! */}
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -73,7 +73,7 @@ const Signup = () => {
         <div className="signupBar"> Signup/ Login to continue</div>
         {/* Footer text */}
         <div className="footerText">
-          created by Jacob Walton 2021
+          created by Jacob Walton 2022
           <br />
           powered by DeezerAPI
         </div>

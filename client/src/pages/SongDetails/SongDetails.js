@@ -25,7 +25,6 @@ const SongDetails = (props) => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setTrack(res);
         setTrackTitle(res.title);
         setTrackArtist(res.artist.name);
@@ -43,7 +42,6 @@ const SongDetails = (props) => {
     trackCover: trackCover,
     trackAlbum: trackAlbum,
   };
-  console.log("trackInfo :>> ", trackInfo);
 
   for (let i = 0; i < user.favorites.length; i++) {
     if (user.favorites[i].trackId === trackId) {
@@ -52,6 +50,7 @@ const SongDetails = (props) => {
   }
 
   // Create state for comments
+  const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState("");
   const commentInfo = {
     content: comment,
@@ -60,6 +59,21 @@ const SongDetails = (props) => {
   };
 
   // useEffect to get all commnets where trackId matches
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/getComments`)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("RES!!!!", res);
+        // setTrack(res);
+        // setTrackTitle(res.title);
+        // setTrackArtist(res.artist.name);
+        // setTrackCover(res.album.cover_xl);
+        // setTrackAlbum(res.album.title);
+        // document.title = `${res.title} - ${res.artist.name}`;
+        // setTrackLoading(false);
+      });
+  }, []);
+
   // handleChange func for adding new comments
   const handleChange = (e) => {
     setComment(e.currentTarget.value);
@@ -155,13 +169,12 @@ const SongDetails = (props) => {
         <h2 id="commentHeader">Sound Off!</h2>
 
         <form id="newComment" onSubmit={handleSubmit}>
-          <textArea
+          <textarea
             onChange={handleChange}
             id="commentText"
             placeholder={`What do you think?`}
             value={comment}
-            contenteditable
-          ></textArea>
+          ></textarea>
           <button type="submit">Submit</button>
         </form>
       </div>

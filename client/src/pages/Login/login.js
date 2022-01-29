@@ -71,7 +71,7 @@ const Login = () => {
         <div className="signupBar"> Signup/ Login to continue</div>
         {/* Footer text */}
         <div className="footerText">
-          created by Jacob Walton 2021
+          created by Jacob Walton 2022
           <br />
           powered by DeezerAPI
         </div>

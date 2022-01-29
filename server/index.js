@@ -166,6 +166,10 @@ app.post("/api/removeFavorite", (req, res) => {
 });
 
 // COMMENT ROUTES
+//Get all comments for a track
+app.get("/api/getComments", (req, res) => {});
+
+// Add comment
 app.post("/api/addComment", (req, res) => {
   console.log("ROUTE HIT!");
   console.log(req.body);
