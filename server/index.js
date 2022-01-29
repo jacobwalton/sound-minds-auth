@@ -33,6 +33,21 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
+const whitelist = [
+  "http://localhost:5000",
+  "https://sound-minds-jacob.herokuapp.com",
+  "http://localhost:3000",
+];
+const corsOptions = {
+  credentials: true,
+  origin: (origin, cb) => {
+    if (whitelist.includes(origin)) return cb(null, true);
+
+    cb(new Error("Not allowed by CORS"));
+  },
+};
+app.use(cors(corsOptions));
+
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
