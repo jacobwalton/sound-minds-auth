@@ -33,14 +33,14 @@ if (process.env.NODE_ENV === "production") {
     })
   );
 }
-// let corsOptions = {
-//   origin: "*",
-//   credentials: true,
-//   "Access-Control-Allow-Origin": "*",
-//   "Access-Control-Allow-Credentials": "true",
-// };
+let corsOptions = {
+  origin: "*",
+  credentials: true,
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Credentials": "true",
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -56,23 +56,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-let whitelist = [
-  "http://localhost:5000",
-  "http://localhost:3000",
-  "https://sound-minds-jacob.herokuapp.com",
-];
-let corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
-app.use(cors(corsOptions));
-
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
@@ -82,6 +65,12 @@ if (process.env.NODE_ENV === "production") {
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://sound-minds-jacob.herokuapp.com"
+  );
+});
+app.use("*", (req, res) => {
   res.header(
     "Access-Control-Allow-Origin",
     "https://sound-minds-jacob.herokuapp.com"
