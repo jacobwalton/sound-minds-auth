@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(
     cors({
       credentials: true,
-      "Access-Control-Allow-Origin": "https://sound-minds-jacob.herokuapp.com",
+      "Access-Control-Allow-Origin": true,
     })
   );
 }
