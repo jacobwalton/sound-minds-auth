@@ -70,17 +70,10 @@ app.get("*", (req, res) => {
     "https://sound-minds-jacob.herokuapp.com"
   );
 });
-app.use("*", (req, res) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://sound-minds-jacob.herokuapp.com"
-  );
-});
 
 //Auth routes----
 //Log In
 app.get("/api/user", (req, res) => {
-  res.header("Access-Control-Allow-Credentials", true);
   const tokenData = jwt.verify(
     req.cookies.auth_token ? req.cookies.auth_token : "",
     secret
