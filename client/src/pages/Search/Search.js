@@ -27,7 +27,7 @@ const Search = () => {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": "*",
+        "Access-Control-Allow-Credentials": "true",
         "Cache-Control": null,
         "X-Requested-With": null,
       },
