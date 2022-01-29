@@ -6,6 +6,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
+import path from "path";
 import Comment from "./models/comment.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
