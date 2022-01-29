@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/user", {
+      .get("localhost:5000/api/user", {
         withCredentials: true,
         "Access-Control-Allow-Credentials": true,
       })
