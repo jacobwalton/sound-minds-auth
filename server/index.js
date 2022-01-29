@@ -36,6 +36,8 @@ if (process.env.NODE_ENV === "production") {
 let corsOptions = {
   origin: "*",
   credentials: true,
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Credentials": "true",
 };
 
 app.use(cors(corsOptions));
@@ -63,7 +65,10 @@ if (process.env.NODE_ENV === "production") {
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://sound-minds-jacob.herokuapp.com"
+  );
 });
 
 //Auth routes----
