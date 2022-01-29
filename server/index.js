@@ -24,13 +24,14 @@ mongoose
   .catch((err) => console.error(err));
 
 //Middleware
-
-app.use(
-  cors({
-    credentials: true,
-    "Access-Control-Allow-Origin": "htpp://localhost:5000/",
-  })
-);
+if (process.env.NODE_ENV === "production") {
+  app.use(
+    cors({
+      credentials: true,
+      "Access-Control-Allow-Origin": "https://sound-minds-jacob.herokuapp.com",
+    })
+  );
+}
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
