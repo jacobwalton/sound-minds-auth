@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
 import Comment from "./models/comment.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 const secret = process.env.REACT_APP_JWT_SECRET;
 
