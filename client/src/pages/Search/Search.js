@@ -28,8 +28,7 @@ const Search = () => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin":
-          "https://sound-minds-jacob.herokuapp.com",
+        "Access-Control-Allow-Origin": "*",
         "Cache-Control": null,
         "X-Requested-With": null,
       },
