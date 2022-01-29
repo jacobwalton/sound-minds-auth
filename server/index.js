@@ -33,7 +33,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
-app.use("/", express.static(path.join(__dirname, "/client/build")));
+app.use("*", express.static(path.join(__dirname, "/client/build")));
 
 // Gen route
 // if (process.env.NODE_ENV === "production") {
