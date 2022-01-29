@@ -23,7 +23,17 @@ const Search = () => {
     }
     // console.log(baseUrl);
     // `https://api.allorigins.win/get?url=${encodeURIComponent(baseUrl)}`);
-    return fetch(baseUrl, { mode: "no-cors" })
+    return fetch(baseUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "*",
+        "Cache-Control": null,
+        "X-Requested-With": null,
+      },
+      method: "GET",
+      mode: "cors",
+    })
       .then((res) => res.json())
       .then((data) => setResults(data.data))
       .catch((err) => console.log("ERROR: ", err));
