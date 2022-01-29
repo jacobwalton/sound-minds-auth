@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
 import Comment from "./models/comment.js";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const secret = process.env.REACT_APP_JWT_SECRET;
 
@@ -53,7 +53,7 @@ app.get("/api/user", (req, res) => {
 app.post("/api/signup", (req, res) => {
   const { username, email, password } = req.body;
   //hashes password before saving to collection
-  const hashedPassword = bcryptjs.hashSync(req.body.password, 10);
+  const hashedPassword = bcrypt.hashSync(req.body.password, 10);
   const user = new User({
     username,
     email,
@@ -90,7 +90,7 @@ app.post("/api/login", (req, res) => {
     if (!userData) {
       return res.json({ message: "Login unsuccessful" }).send();
     }
-    const passwordMatch = bcryptjs.compareSync(password, userData.password);
+    const passwordMatch = bcrypt.compareSync(password, userData.password);
     if (passwordMatch) {
       jwt.sign({ id: userData._id, username }, secret, (err, token) => {
         if (err) {
