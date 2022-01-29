@@ -33,15 +33,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
-app.get("/", express.static(path.join(__dirname, "/client/build")));
-app.get("/login", express.static(path.join(__dirname, "/client/build")));
-app.get("/profile", express.static(path.join(__dirname, "/client/build")));
-app.get("/search", express.static(path.join(__dirname, "/client/build")));
-app.get("/signup", express.static(path.join(__dirname, "/client/build")));
-app.get(
-  "/track/:trackId",
-  express.static(path.join(__dirname, "/client/build"))
-);
+app.get("(/*)?", express.static(path.join(__dirname, "/client/build")));
 
 //Auth routes----
 //Log In
