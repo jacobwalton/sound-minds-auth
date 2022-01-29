@@ -24,6 +24,7 @@ const Search = () => {
     // console.log(baseUrl);
     // `https://api.allorigins.win/get?url=${encodeURIComponent(baseUrl)}`);
     return fetch(baseUrl, {
+      origin: "*",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
