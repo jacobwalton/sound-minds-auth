@@ -23,9 +23,12 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/user", { withCredentials: true })
+      .get("http://localhost:5000/api/user", {
+        withCredentials: true,
+        "Access-Control-Allow-Credentials": true,
+      })
       .then((res) => {
-        res.header("Access-Control-Allow-Credentials", true);
+        // res.header("Access-Control-Allow-Credentials", true);
         setEmail(res.data.email);
         setUsername(res.data.username);
         setFavorites(res.data.favorites);
