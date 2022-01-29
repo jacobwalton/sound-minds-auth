@@ -26,7 +26,7 @@ mongoose
 //Middleware
 app.use(
   cors({
-    credentials: true,
+    // credentials: true,
     origin: "*",
   })
 );
