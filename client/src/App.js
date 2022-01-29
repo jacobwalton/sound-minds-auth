@@ -25,6 +25,7 @@ function App() {
     axios
       .get("http://localhost:5000/api/user", { withCredentials: true })
       .then((res) => {
+        res.header("Access-Control-Allow-Credentials", true);
         setEmail(res.data.email);
         setUsername(res.data.username);
         setFavorites(res.data.favorites);
