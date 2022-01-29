@@ -37,7 +37,11 @@ function App() {
 
   const logout = () => {
     axios
-      .post("http://localhost:5000/api/logout", {}, { withCredentials: true })
+      .post(
+        "http://localhost:5000/api/logout",
+        {},
+        { credentials: "same-origin" }
+      )
       .then(() => {
         setEmail("");
       });

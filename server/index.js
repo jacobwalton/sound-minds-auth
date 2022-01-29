@@ -32,21 +32,26 @@ if (process.env.NODE_ENV === "production") {
     })
   );
 }
-
-const whitelist = [
-  "http://localhost:5000",
-  "https://sound-minds-jacob.herokuapp.com",
-  "http://localhost:3000",
-];
-const corsOptions = {
+let corsOptions = {
+  origin: "http://localhost:3000",
   credentials: true,
-  origin: (origin, cb) => {
-    if (whitelist.includes(origin)) return cb(null, true);
-
-    // cb(new Error("Not allowed by CORS"));
-  },
 };
+
 app.use(cors(corsOptions));
+
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
