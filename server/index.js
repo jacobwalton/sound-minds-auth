@@ -7,6 +7,8 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import User from "./models/user.js";
 import path from "path";
+const __dirname = path.resolve();
+
 import Comment from "./models/comment.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
