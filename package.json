@@ -5,16 +5,15 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "14.18.3",
-    "npm": "8.3.0",
+    "node": "v14.18.3",
+    "npm": "8.1.2",
     "nodemon": "2.0.12"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
-    "build": "cd client && npm run build"
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "repository": {
     "type": "git",
