@@ -28,7 +28,7 @@ const Search = () => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "localhost://5000",
         "Cache-Control": null,
         "X-Requested-With": null,
       },
