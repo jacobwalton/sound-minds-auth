@@ -7,7 +7,7 @@ const Search = () => {
 
   const [searchParam, setSearchParam] = useState("");
 
-  const baseUrl = `https://cors-anywhere.herokuapp.com/https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search/?q=${searchParam.replace(
+  const baseUrl = `https://thingproxy.freeboard.io/fetch/https://api.deezer.com/search/?q=${searchParam.replace(
     / /g,
     "%20"
   )}`;
