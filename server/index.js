@@ -34,7 +34,7 @@ app.use(
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build/client", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
 });
 
 //Auth routes----
