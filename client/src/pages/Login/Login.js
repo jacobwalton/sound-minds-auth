@@ -30,7 +30,7 @@ const Login = () => {
     const userData = { email, username, password };
     axios
       .post("http://localhost:5000/api/login", userData, {
-        withCredentials: true,
+        // withCredentials: true,
       })
       .then((response) => {
         user.setEmail(response.data.email);
