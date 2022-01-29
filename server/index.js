@@ -55,8 +55,24 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-app.use(cors());
-app.options("*", cors());
+
+let whitelist = [
+  "http://localhost:5000",
+  "http://localhost:3000",
+  "https://sound-minds-jacob.herokuapp.com",
+];
+let corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
