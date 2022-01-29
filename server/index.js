@@ -33,12 +33,14 @@ app.use(
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+app.get("*", express.static(path.join(__dirname, "/client/build")));
 
-  express.static(path.join(__dirname, "/client/build"));
-});
+// app.all("*", function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+
+//   express.static(path.join(__dirname, "/client/build"));
+// });
 
 //Auth routes----
 //Log In
