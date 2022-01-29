@@ -55,7 +55,8 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-
+app.use(cors());
+app.options("*", cors());
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
