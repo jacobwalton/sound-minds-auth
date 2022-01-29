@@ -33,7 +33,9 @@ app.use(
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
-app.get("(/*)?", express.static(path.join(__dirname, "/client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+});
 
 //Auth routes----
 //Log In
