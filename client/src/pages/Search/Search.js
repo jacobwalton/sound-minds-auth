@@ -24,16 +24,15 @@ const Search = () => {
     // console.log(baseUrl);
     // `https://api.allorigins.win/get?url=${encodeURIComponent(baseUrl)}`);
     return fetch(baseUrl, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin":
-          "https://sound-minds-jacob.herokuapp.com",
-        "Access-Control-Allow-Credentials": "*",
-        "Cache-Control": null,
-        "X-Requested-With": null,
-      },
+      // method: "GET",
+      mode: "no-cors",
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Credentials": "*",
+      //   "Cache-Control": null,
+      //   "X-Requested-With": null,
+      // },
     })
       .then((res) => res.json())
       .then((data) => setResults(data.data))
