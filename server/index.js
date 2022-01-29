@@ -28,7 +28,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(
     cors({
       credentials: true,
-      "Access-Control-Allow-Origin": true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true",
     })
   );
 }
@@ -40,7 +41,7 @@ let corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5000");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
