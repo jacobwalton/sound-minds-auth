@@ -174,11 +174,29 @@ app.post("/api/removeFavorite", (req, res) => {
 });
 
 // Comment routes
-// app.get("/api/getComments", (req, res) => {
-//   Comment.findById(trackId).then(() => {
-//     return res;
-//   });
-// });
+app.put("/api/getComments", (req, res) => {
+  // return new Promise((resolve, reject) => {
+  //   Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
+  //     return data.comment;
+  //     err ? reject(err) : resolve(data.comment);
+  //   });
+  // });
+
+  Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(data.comment);
+      res.json(data);
+      // return data.comment;
+    }
+  });
+
+  // Comment.find({ trackId: req.body.trackId }).then((err, doc) => {
+  //   console.log(req);
+  //   return doc;
+  // });
+});
 
 // Add comment
 app.put("/api/addComment", (req, res) => {

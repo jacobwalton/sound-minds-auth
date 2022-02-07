@@ -54,21 +54,18 @@ const SongDetails = (props) => {
   const [comment, setComment] = useState("");
 
   // useEffect to get all commnets where trackId matches
-  // useEffect(() => {
-  axios
-    .get(`http://localhost:5000/api/getComments`, trackId)
-    .then((res) => res.json())
-    .then((res) => {
-      console.log("RES!!!!", res);
-      // setTrack(res);
-      // setTrackTitle(res.title);
-      // setTrackArtist(res.artist.name);
-      // setTrackCover(res.album.cover_xl);
-      // setTrackAlbum(res.album.title);
-      // document.title = `${res.title} - ${res.artist.name}`;
-      // setTrackLoading(false);
-    });
-  // }, []);
+  useEffect(() => {
+    axios
+      .put(`http://localhost:5000/api/getComments`, {
+        trackId: trackId,
+      })
+      .then((res, err) => {
+        setCommentList(res.data.comment);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [trackId, setCommentList]);
 
   // handleChange func for adding new comments
   const handleChange = (e) => {
