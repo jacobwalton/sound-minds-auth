@@ -52,11 +52,6 @@ const SongDetails = (props) => {
   // Create state for comments
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState("");
-  const commentInfo = {
-    content: comment,
-    commentBy: user.username,
-    trackId: trackId,
-  };
 
   // useEffect to get all commnets where trackId matches
   useEffect(() => {
@@ -83,7 +78,11 @@ const SongDetails = (props) => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/api/addComment", commentInfo)
+      .post("http://localhost:5000/api/addComment", {
+        trackId: trackId,
+        content: comment,
+        commentBy: user.username,
+      })
       .then((res) => {
         if (res.data.success) {
           window.location.reload();

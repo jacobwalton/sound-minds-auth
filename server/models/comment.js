@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Comment = mongoose.model(
-  "Track",
+  "Comments",
   new mongoose.Schema({
     trackId: { type: Number },
     comment: [
