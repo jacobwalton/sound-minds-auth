@@ -209,19 +209,39 @@ app.post("/api/removeFavorite", (req, res) => {
 app.get("/api/getComments", (req, res) => {});
 
 // Add comment
-app.post("/api/addComment", (req, res) => {
-  console.log("ROUTE HIT!");
-  console.log(req.body);
-  const comment = new Comment(req.body);
+// app.post("/api/addComment", (req, res) => {
+//   User.findOne({ tackId: req.body.trackId }).exec((err, doc) => {
 
-  comment.save((err, comment) => {
-    if (err) {
-      return res.json({ success: false, err });
-    } else {
-      return res.json({ success: true });
-    }
-  });
-});
+//     //Pushes data to collection
+//     doc.comments.push({
+//       trackId: Number(req.body.trackId),
+//       trackTitle: String(req.body.trackTitle),
+//       trackArtist: String(req.body.trackArtist),
+//       trackCover: String(req.body.trackCover),
+//     });
+//     doc.save((err) => {
+//       if (err) {
+//         console.error("Failed to add song to favorites", err);
+//       } else {
+//         console.log(`Succefully added song to favorites`);
+//       }
+//     });
+//   });
+// });
+
+// app.post("/api/addComment", (req, res) => {
+//   console.log("ROUTE HIT!");
+//   console.log(req.body);
+//   const comment = new Comment(req.body);
+
+//   comment.save((err, comment) => {
+//     if (err) {
+//       return res.json({ success: false, err });
+//     } else {
+//       return res.json({ success: true });
+//     }
+//   });
+// });
 
 app.listen(PORT, () => {
   console.log(`Running at http://localhost:${PORT} 🚀`);
