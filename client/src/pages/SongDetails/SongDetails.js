@@ -80,6 +80,7 @@ const SongDetails = (props) => {
       content: comment,
       commentBy: user.username,
     });
+    window.location.reload();
   };
 
   const toggleFavorite = () => {
@@ -156,7 +157,6 @@ const SongDetails = (props) => {
       {/* COMMENT SECTION */}
       <div className="commentSection">
         <h2 id="commentHeader">Sound Off!</h2>
-
         <form id="newComment" onSubmit={handleSubmit}>
           <textarea
             onChange={handleChange}
@@ -166,6 +166,13 @@ const SongDetails = (props) => {
           ></textarea>
           <button type="submit">Submit</button>
         </form>
+        <div id="commentHeader">{commentList.length} comment(s)</div>
+        {commentList.map((comment, key) => (
+          <div className="comment" key={key}>
+            <strong className="commentBy">{comment.commentBy}: </strong>
+            <em className="content">{comment.content}</em>
+          </div>
+        ))}
       </div>
     </div>
   );
