@@ -44,7 +44,7 @@ const SongDetails = (props) => {
   };
 
   for (let i = 0; i < user.favorites.length; i++) {
-    if (user.favorites[i].trackId === trackId) {
+    if (user.favorites[i].trackId === Number(trackId)) {
       favorited = true;
     }
   }
@@ -87,7 +87,7 @@ const SongDetails = (props) => {
     //Removing favorite
     let arr = user.favorites;
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].trackId === trackId) {
+      if (arr[i].trackId === Number(trackId)) {
         axios.post("http://localhost:5000/api/removeFavorite", trackInfo);
 
         window.location.reload();

@@ -37,7 +37,8 @@ function App() {
       });
   }, []);
 
-  const logout = () => {
+  const logout = (e) => {
+    e.preventDefault();
     axios
       .post(
         "http://localhost:5000/api/logout",
@@ -95,7 +96,7 @@ function App() {
                 /> */}
               </div>
             </Link>
-            <Link to="" onClick={() => logout()}>
+            <Link to="" onClick={(e) => logout(e)}>
               <div className="logout-nav">
                 {" "}
                 <img

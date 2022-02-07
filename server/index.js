@@ -122,8 +122,10 @@ app.post("/api/login", (req, res) => {
 
 app.post("/api/logout", (req, res) => {
   //clears cookie/token
-  res.cookie("auth_token", "").send();
-  window.location = "/";
+
+  res.cookie("auth_token").end();
+
+  // window.location = "/";
 });
 
 //Favorite Routes -------------
@@ -186,7 +188,7 @@ app.put("/api/getComments", (req, res) => {
     if (err) {
       console.error(err);
     } else {
-      console.log(data.comment);
+      // console.log(data.comment);
       res.json(data);
       // return data.comment;
     }

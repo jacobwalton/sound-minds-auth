@@ -203,7 +203,6 @@ audio::-webkit-media-controls-panel {
   border-radius: 8px;
   margin-top: 5px;
   transition: all 0.3s;
-  font-weight: bolder;
 }
 
 .comment:nth-child(3n + 3) {
