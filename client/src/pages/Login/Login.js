@@ -30,6 +30,7 @@ const Login = () => {
     const userData = { email, username, password };
     axios
       .post("http://localhost:5000/api/login", userData, {
+        "Access-Control-Allow-Origin": "https://localhost:3000",
         withCredentials: true,
       })
       .then((response) => {
@@ -62,10 +63,10 @@ const Login = () => {
           </h1>
         </div>
         <div className="aboutText">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Find new music, share new music and discuss it all right here. Keep
+          track of all of your facorite songs in one place. Whether you're a fan
+          of a tune or find it overrated, you're welcome to make your points,
+          just be ready to defend them if neccessary.
         </div>
         {/* Sign up/ log in to continue */}
         <div className="signupBar"> Signup/ Login to continue</div>

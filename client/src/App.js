@@ -19,6 +19,7 @@ import axios from "axios";
 function App() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
         setEmail(res.data.email);
         setUsername(res.data.username);
         setFavorites(res.data.favorites);
+        setCreatedAt(res.data.createdAt);
       });
   }, []);
 
@@ -57,6 +59,8 @@ function App() {
         setEmail,
         favorites,
         setFavorites,
+        createdAt,
+        setCreatedAt,
       }}
     >
       <BrowserRouter>
