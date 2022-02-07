@@ -44,7 +44,7 @@ const SongDetails = (props) => {
   };
 
   for (let i = 0; i < user.favorites.length; i++) {
-    if (user.favorites[i].trackId === trackId) {
+    if (user.favorites[i].trackId === Number(trackId)) {
       favorited = true;
     }
   }
@@ -52,27 +52,20 @@ const SongDetails = (props) => {
   // Create state for comments
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState("");
-  const commentInfo = {
-    content: comment,
-    commentBy: user.username,
-    trackId: trackId,
-  };
 
   // useEffect to get all commnets where trackId matches
   useEffect(() => {
-    fetch(`http://localhost:5000/api/getComments`)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("RES!!!!", res);
-        // setTrack(res);
-        // setTrackTitle(res.title);
-        // setTrackArtist(res.artist.name);
-        // setTrackCover(res.album.cover_xl);
-        // setTrackAlbum(res.album.title);
-        // document.title = `${res.title} - ${res.artist.name}`;
-        // setTrackLoading(false);
+    axios
+      .put(`http://localhost:5000/api/getComments`, {
+        trackId: trackId,
+      })
+      .then((res, err) => {
+        setCommentList(res.data.comment);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-  }, []);
+  }, [trackId, setCommentList]);
 
   // handleChange func for adding new comments
   const handleChange = (e) => {
@@ -82,22 +75,19 @@ const SongDetails = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/api/addComment", commentInfo)
-      .then((res) => {
-        if (res.data.success) {
-          window.location.reload();
-        } else {
-          console.error("Something went wrong, couldn't add new comment");
-        }
-      });
+    axios.put("http://localhost:5000/api/addComment", {
+      trackId: trackId,
+      content: comment,
+      commentBy: user.username,
+    });
+    window.location.reload();
   };
 
   const toggleFavorite = () => {
     //Removing favorite
     let arr = user.favorites;
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].trackId === trackId) {
+      if (arr[i].trackId === Number(trackId)) {
         axios.post("http://localhost:5000/api/removeFavorite", trackInfo);
 
         window.location.reload();
@@ -167,7 +157,6 @@ const SongDetails = (props) => {
       {/* COMMENT SECTION */}
       <div className="commentSection">
         <h2 id="commentHeader">Sound Off!</h2>
-
         <form id="newComment" onSubmit={handleSubmit}>
           <textarea
             onChange={handleChange}
@@ -177,6 +166,13 @@ const SongDetails = (props) => {
           ></textarea>
           <button type="submit">Submit</button>
         </form>
+        <div id="commentHeader">{commentList.length} comment(s)</div>
+        {commentList.map((comment, key) => (
+          <div className="comment" key={key}>
+            <strong className="commentBy">{comment.commentBy}: </strong>
+            <em className="content">{comment.content}</em>
+          </div>
+        ))}
       </div>
     </div>
   );

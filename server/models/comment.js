@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
 const Comment = mongoose.model(
-  "Comment",
-  new mongoose.Schema(
-    {
-      commentBy: { type: String },
-      content: { type: String },
-      trackId: { type: Number },
-    },
-    { timestamps: true }
-  )
+  "Comments",
+  new mongoose.Schema({
+    trackId: { type: Number },
+    comment: [
+      {
+        commentBy: { type: String },
+        content: { type: String },
+      },
+      { timestamps: true },
+    ],
+  })
 );
 export default Comment;

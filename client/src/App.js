@@ -19,6 +19,7 @@ import axios from "axios";
 function App() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -32,10 +33,12 @@ function App() {
         setEmail(res.data.email);
         setUsername(res.data.username);
         setFavorites(res.data.favorites);
+        setCreatedAt(res.data.createdAt);
       });
   }, []);
 
-  const logout = () => {
+  const logout = (e) => {
+    e.preventDefault();
     axios
       .post(
         "http://localhost:5000/api/logout",
@@ -57,6 +60,8 @@ function App() {
         setEmail,
         favorites,
         setFavorites,
+        createdAt,
+        setCreatedAt,
       }}
     >
       <BrowserRouter>
@@ -91,7 +96,7 @@ function App() {
                 /> */}
               </div>
             </Link>
-            <Link to="" onClick={() => logout()}>
+            <Link to="" onClick={(e) => logout(e)}>
               <div className="logout-nav">
                 {" "}
                 <img

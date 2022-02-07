@@ -24,66 +24,35 @@ mongoose
   .catch((err) => console.error(err));
 
 //Middleware
-if (process.env.NODE_ENV === "production") {
-  app.use(
-    cors({
-      credentials: true,
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": "true",
-    })
-  );
-}
-let corsOptions = {
-  origin: "*",
-  credentials: true,
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Credentials": "true",
-};
-
-app.use(cors(corsOptions));
-
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://sound-minds-jacob.herokuapp.com"
-  );
-});
-
 //Auth routes----
 //Log In
 app.get("/api/user", (req, res) => {
-  const tokenData = jwt.verify(
-    req.cookies.auth_token ? req.cookies.auth_token : "",
-    secret
-  );
+  let tokenData;
+  try {
+    tokenData = jwt.verify(
+      req.cookies.auth_token ? req.cookies.auth_token : "",
+      secret
+    );
+  } catch (error) {
+    return "";
+  }
   User.findById(tokenData.id).then((userData) => {
     res.json({
       id: userData._id,
       email: userData.email,
       username: userData.username,
       favorites: userData.favorites,
+      createdAt: userData.createdAt,
     });
   });
 });
@@ -153,8 +122,10 @@ app.post("/api/login", (req, res) => {
 
 app.post("/api/logout", (req, res) => {
   //clears cookie/token
-  res.cookie("auth_token", "").send();
-  window.location = "/";
+
+  res.cookie("auth_token").end();
+
+  // window.location = "/";
 });
 
 //Favorite Routes -------------
@@ -204,24 +175,89 @@ app.post("/api/removeFavorite", (req, res) => {
   });
 });
 
-// COMMENT ROUTES
-//Get all comments for a track
-app.get("/api/getComments", (req, res) => {});
+// Comment routes
+app.put("/api/getComments", (req, res) => {
+  // return new Promise((resolve, reject) => {
+  //   Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
+  //     return data.comment;
+  //     err ? reject(err) : resolve(data.comment);
+  //   });
+  // });
+
+  Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      // console.log(data.comment);
+      res.json(data);
+      // return data.comment;
+    }
+  });
+
+  // Comment.find({ trackId: req.body.trackId }).then((err, doc) => {
+  //   console.log(req);
+  //   return doc;
+  // });
+});
 
 // Add comment
-app.post("/api/addComment", (req, res) => {
-  console.log("ROUTE HIT!");
-  console.log(req.body);
-  const comment = new Comment(req.body);
-
-  comment.save((err, comment) => {
-    if (err) {
-      return res.json({ success: false, err });
-    } else {
-      return res.json({ success: true });
+app.put("/api/addComment", (req, res) => {
+  // const comments = new Comment(req.body);
+  Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
+    // If track already has comments, add to comment doc
+    if (doc) {
+      doc.trackId = req.body.trackId;
+      doc.comment.push({
+        commentBy: String(req.body.commentBy),
+        content: String(req.body.content),
+      });
+      doc.save((err, comment) => {
+        if (err) {
+          return res.json({ success: false, err });
+        } else {
+          return res.json({ success: true });
+        }
+      });
+    }
+    // If track has no comments, create new doc and add first comment
+    else {
+      const comments = new Comment(req.body);
+      comments.trackId = req.body.trackId;
+      comments.comment.push({
+        commentBy: String(req.body.commentBy),
+        content: String(req.body.content),
+      });
+      comments.save((err, comment) => {
+        if (err) {
+          return res.json({ success: false, err });
+        } else {
+          return res.json({ success: true });
+        }
+      });
     }
   });
 });
+
+// app.post("/api/addComment", (req, res) => {
+//   Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
+//     //Pushes data to collection
+//     const comment = new Comment({
+//       trackId: req.body.trackId,
+//     });
+//     doc.comments.trackId = Number(req.body.trackId);
+//     doc.comments.comment.push({
+//       commentBy: String(req.body.commentBy),
+//       content: String(req.body.content),
+//     });
+//     doc.save((err) => {
+//       if (err) {
+//         console.error("Failed to add comment", err);
+//       } else {
+//         console.log(`Successfully added comment to song`);
+//       }
+//     });
+//   });
+// });
 
 app.listen(PORT, () => {
   console.log(`Running at http://localhost:${PORT} 🚀`);

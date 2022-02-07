@@ -22,7 +22,7 @@ const Favorites = () => {
               key={item.trackId}
               className="result"
               style={{
-                backgroundImage: `url(${item.trackCover})`,
+                // backgroundImage: `url(${item.trackCover})`,
                 boxShadow: "5px 1px 10px #999",
               }}
               trackId={item.trackId}

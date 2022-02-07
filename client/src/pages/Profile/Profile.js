@@ -2,10 +2,11 @@ import "./profile.css";
 import { useContext } from "react";
 import UserContext from "../../helpers/UserContext";
 import Colors from "../../components/Colors/Colors";
+import moment from "moment";
+moment().format();
 
 const Profile = () => {
   const user = useContext(UserContext);
-  document.title = `${user.username}'s Profile`;
 
   return (
     <div className="profileContainer">
@@ -21,8 +22,8 @@ const Profile = () => {
           <li>
             Email Address: <span className="userInfo">{user.email}</span>
           </li>
-          <li>Member since: </li>
-          <li>Number of comments: </li>
+          <li>Member since: {moment(user.createdAt).format("MM/DD/YYYY")}</li>
+          {/* <li>Number of comments: </li> */}
           <li>Number of favorites: {user.favorites.length}</li>
         </ul>
       </div>
