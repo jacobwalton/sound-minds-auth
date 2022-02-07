@@ -54,20 +54,21 @@ const SongDetails = (props) => {
   const [comment, setComment] = useState("");
 
   // useEffect to get all commnets where trackId matches
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/getComments`)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("RES!!!!", res);
-        // setTrack(res);
-        // setTrackTitle(res.title);
-        // setTrackArtist(res.artist.name);
-        // setTrackCover(res.album.cover_xl);
-        // setTrackAlbum(res.album.title);
-        // document.title = `${res.title} - ${res.artist.name}`;
-        // setTrackLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  axios
+    .get(`http://localhost:5000/api/getComments`, trackId)
+    .then((res) => res.json())
+    .then((res) => {
+      console.log("RES!!!!", res);
+      // setTrack(res);
+      // setTrackTitle(res.title);
+      // setTrackArtist(res.artist.name);
+      // setTrackCover(res.album.cover_xl);
+      // setTrackAlbum(res.album.title);
+      // document.title = `${res.title} - ${res.artist.name}`;
+      // setTrackLoading(false);
+    });
+  // }, []);
 
   // handleChange func for adding new comments
   const handleChange = (e) => {
@@ -77,19 +78,11 @@ const SongDetails = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/api/addComment", {
-        trackId: trackId,
-        content: comment,
-        commentBy: user.username,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          window.location.reload();
-        } else {
-          console.error("Something went wrong, couldn't add new comment");
-        }
-      });
+    axios.put("http://localhost:5000/api/addComment", {
+      trackId: trackId,
+      content: comment,
+      commentBy: user.username,
+    });
   };
 
   const toggleFavorite = () => {

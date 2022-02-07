@@ -174,26 +174,70 @@ app.post("/api/removeFavorite", (req, res) => {
 });
 
 // Comment routes
-// ​​app.get("/api/getComments", (req, res) => {});
+// app.get("/api/getComments", (req, res) => {
+//   Comment.findById(trackId).then(() => {
+//     return res;
+//   });
+// });
 
 // Add comment
-app.post("/api/addComment", (req, res) => {
-  User.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
-    //Pushes data to collection
-    doc.comments.trackId = Number(req.body.trackId);
-    doc.comments.comment.push({
-      commentBy: String(req.body.commentBy),
-      content: String(req.body.content),
-    });
-    doc.save((err) => {
-      if (err) {
-        console.error("Failed to add comment", err);
-      } else {
-        console.log(`Successfully added comment to song`);
-      }
-    });
+app.put("/api/addComment", (req, res) => {
+  // const comments = new Comment(req.body);
+  Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
+    // If track already has comments, add to comment doc
+    if (doc) {
+      doc.trackId = req.body.trackId;
+      doc.comment.push({
+        commentBy: String(req.body.commentBy),
+        content: String(req.body.content),
+      });
+      doc.save((err, comment) => {
+        if (err) {
+          return res.json({ success: false, err });
+        } else {
+          return res.json({ success: true });
+        }
+      });
+    }
+    // If track has no comments, create new doc and add first comment
+    else {
+      const comments = new Comment(req.body);
+      comments.trackId = req.body.trackId;
+      comments.comment.push({
+        commentBy: String(req.body.commentBy),
+        content: String(req.body.content),
+      });
+      comments.save((err, comment) => {
+        if (err) {
+          return res.json({ success: false, err });
+        } else {
+          return res.json({ success: true });
+        }
+      });
+    }
   });
 });
+
+// app.post("/api/addComment", (req, res) => {
+//   Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
+//     //Pushes data to collection
+//     const comment = new Comment({
+//       trackId: req.body.trackId,
+//     });
+//     doc.comments.trackId = Number(req.body.trackId);
+//     doc.comments.comment.push({
+//       commentBy: String(req.body.commentBy),
+//       content: String(req.body.content),
+//     });
+//     doc.save((err) => {
+//       if (err) {
+//         console.error("Failed to add comment", err);
+//       } else {
+//         console.log(`Successfully added comment to song`);
+//       }
+//     });
+//   });
+// });
 
 app.listen(PORT, () => {
   console.log(`Running at http://localhost:${PORT} 🚀`);
