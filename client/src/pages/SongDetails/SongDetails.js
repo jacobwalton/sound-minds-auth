@@ -52,11 +52,6 @@ const SongDetails = (props) => {
   // Create state for comments
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState("");
-  const commentInfo = {
-    content: comment,
-    commentBy: user.username,
-    trackId: trackId,
-  };
 
   // useEffect to get all commnets where trackId matches
   useEffect(() => {
@@ -162,7 +157,6 @@ const SongDetails = (props) => {
       {/* COMMENT SECTION */}
       <div className="commentSection">
         <h2 id="commentHeader">Sound Off!</h2>
-
         <form id="newComment" onSubmit={handleSubmit}>
           <textarea
             onChange={handleChange}

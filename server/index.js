@@ -24,6 +24,7 @@ mongoose
   .catch((err) => console.error(err));
 
 //Middleware
+<<<<<<< HEAD
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Origin", req.headers.origin);
@@ -38,6 +39,14 @@ app.use(function (req, res, next) {
     next();
   }
 });
+=======
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
+>>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
 
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
@@ -130,8 +139,10 @@ app.post("/api/login", (req, res) => {
 
 app.post("/api/logout", (req, res) => {
   //clears cookie/token
-  res.cookie("auth_token", "").send();
-  window.location = "/";
+
+  res.cookie("auth_token").end();
+
+  // window.location = "/";
 });
 
 //Favorite Routes -------------
@@ -183,6 +194,16 @@ app.post("/api/removeFavorite", (req, res) => {
 
 // Comment routes
 app.put("/api/getComments", (req, res) => {
+<<<<<<< HEAD
+=======
+  // return new Promise((resolve, reject) => {
+  //   Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
+  //     return data.comment;
+  //     err ? reject(err) : resolve(data.comment);
+  //   });
+  // });
+
+>>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
   Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
     if (err) {
       console.error(err);
@@ -190,6 +211,7 @@ app.put("/api/getComments", (req, res) => {
       // console.log(data.comment);
       res.json(data);
       // return data.comment;
+<<<<<<< HEAD
     }
   });
 });
@@ -228,10 +250,58 @@ app.put("/api/addComment", (req, res) => {
           return res.json({ success: true });
         }
       });
+=======
+>>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
+    }
+  });
+
+  // Comment.find({ trackId: req.body.trackId }).then((err, doc) => {
+  //   console.log(req);
+  //   return doc;
+  // });
+});
+
+<<<<<<< HEAD
+=======
+// Add comment
+app.put("/api/addComment", (req, res) => {
+  // const comments = new Comment(req.body);
+  Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
+    // If track already has comments, add to comment doc
+    if (doc) {
+      doc.trackId = req.body.trackId;
+      doc.comment.push({
+        commentBy: String(req.body.commentBy),
+        content: String(req.body.content),
+      });
+      doc.save((err, comment) => {
+        if (err) {
+          return res.json({ success: false, err });
+        } else {
+          return res.json({ success: true });
+        }
+      });
+    }
+    // If track has no comments, create new doc and add first comment
+    else {
+      const comments = new Comment(req.body);
+      comments.trackId = req.body.trackId;
+      comments.comment.push({
+        commentBy: String(req.body.commentBy),
+        content: String(req.body.content),
+      });
+      comments.save((err, comment) => {
+        if (err) {
+          return res.json({ success: false, err });
+        } else {
+          return res.json({ success: true });
+        }
+      });
     }
   });
 });
 
+>>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
 // app.post("/api/addComment", (req, res) => {
 //   Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
 //     //Pushes data to collection
