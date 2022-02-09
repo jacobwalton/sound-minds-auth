@@ -24,32 +24,56 @@ mongoose
   .catch((err) => console.error(err));
 
 //Middleware
-<<<<<<< HEAD
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
-  );
-  if ("OPTIONS" == req.method) {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
-=======
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000",
-  })
-);
->>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
+const whitelist = [
+  "http://localhost:3000",
+  "https://sound-minds-jacob.herokuapp.com/",
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Credentials", true);
+//   res.header("Access-Control-Allow-Origin", req.headers.origin);
+//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+//   );
+//   if ("OPTIONS" == req.method) {
+//     res.sendStatus(200);
+//   } else {
+//     next();
+//   }
+// });
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: "http://localhost:3000",
+//   })
+// );
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    // res.header(
+    //   "Access-Control-Allow-Origin",
+    //   "https://sound-minds-jacob.herokuapp.com"
+    // );
+  });
+}
 
 //Auth routes----
 //Log In
@@ -194,16 +218,6 @@ app.post("/api/removeFavorite", (req, res) => {
 
 // Comment routes
 app.put("/api/getComments", (req, res) => {
-<<<<<<< HEAD
-=======
-  // return new Promise((resolve, reject) => {
-  //   Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
-  //     return data.comment;
-  //     err ? reject(err) : resolve(data.comment);
-  //   });
-  // });
-
->>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
   Comment.findOne({ trackId: req.body.trackId }, (err, data) => {
     if (err) {
       console.error(err);
@@ -211,7 +225,6 @@ app.put("/api/getComments", (req, res) => {
       // console.log(data.comment);
       res.json(data);
       // return data.comment;
-<<<<<<< HEAD
     }
   });
 });
@@ -250,8 +263,6 @@ app.put("/api/addComment", (req, res) => {
           return res.json({ success: true });
         }
       });
-=======
->>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
     }
   });
 
@@ -261,8 +272,6 @@ app.put("/api/addComment", (req, res) => {
   // });
 });
 
-<<<<<<< HEAD
-=======
 // Add comment
 app.put("/api/addComment", (req, res) => {
   // const comments = new Comment(req.body);
@@ -301,7 +310,6 @@ app.put("/api/addComment", (req, res) => {
   });
 });
 
->>>>>>> 100db41b563bf491072bd5cb52cfee5ac83d3be9
 // app.post("/api/addComment", (req, res) => {
 //   Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
 //     //Pushes data to collection
