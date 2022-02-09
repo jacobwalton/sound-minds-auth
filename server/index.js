@@ -40,30 +40,31 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Origin", req.headers.origin);
-//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
-//   );
-//   if ("OPTIONS" == req.method) {
-//     res.sendStatus(200);
-//   } else {
-//     next();
-//   }
-// });
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: "http://localhost:3000",
-//   })
-// );
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+  );
+  if ("OPTIONS" == req.method) {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
 app.use(cookieParser());
 app.use(bodyParser.json({ extended: true }));
 
 if (process.env.NODE_ENV === "production") {
+  app.use(
+    cors({
+      credentials: true,
+      origin: "https://sound-minds-jacob.herokuapp.com/",
+    })
+  );
   app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {
