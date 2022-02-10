@@ -266,11 +266,6 @@ app.put("/api/addComment", (req, res) => {
       });
     }
   });
-
-  // Comment.find({ trackId: req.body.trackId }).then((err, doc) => {
-  //   console.log(req);
-  //   return doc;
-  // });
 });
 
 // Add comment
@@ -310,27 +305,6 @@ app.put("/api/addComment", (req, res) => {
     }
   });
 });
-
-// app.post("/api/addComment", (req, res) => {
-//   Comment.findOne({ trackId: req.body.trackId }).exec((err, doc) => {
-//     //Pushes data to collection
-//     const comment = new Comment({
-//       trackId: req.body.trackId,
-//     });
-//     doc.comments.trackId = Number(req.body.trackId);
-//     doc.comments.comment.push({
-//       commentBy: String(req.body.commentBy),
-//       content: String(req.body.content),
-//     });
-//     doc.save((err) => {
-//       if (err) {
-//         console.error("Failed to add comment", err);
-//       } else {
-//         console.log(`Successfully added comment to song`);
-//       }
-//     });
-//   });
-// });
 
 app.listen(PORT, () => {
   console.log(`Running at http://localhost:${PORT} 🚀`);

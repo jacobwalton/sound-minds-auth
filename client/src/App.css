@@ -14,8 +14,8 @@
 }
 
 .nav {
-  z-index: 5;
-  opacity: 90%;
+  z-index: 10;
+  opacity: 100%;
   top: -10px;
 }
 
