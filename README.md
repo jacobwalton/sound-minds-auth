@@ -5,12 +5,14 @@
 
 ## Description:
 
-An easy to use application which allows users to engage with other music fans, discuss opinions and keep a collection of all their favorite songs.
+Sound Minds is a simple, easy-to-use web application which allows users to find new music and share their opinions on it.
+Users are able to easily navigate the application and features in a couple ways. When a user wants to find a song to see what others are saying about it, they can easily search for it. Click on a search result and view details about the song, add it to your favorites, listen to a preview and share your opinion.
 
 # Table of Contents:
 
 - [Installation ](#installation)
 - [Usage](#usage)
+- [Features](#features)
 - [License](#license)
 - [Contributors](#contributors)
 - [Questions](#questions)
@@ -24,6 +26,13 @@ Run "npm i" to install necessary dependencies.
 ## Usage
 
 Run "npm run dev" in the console to run locally.
+
+## Features
+
+- **Search** - _Users will be able to search for songs using the public Deezer API_
+- **Signup/ Login** - _Users will be able to create an account and login. There will be protected routes and logic set up to prevent users from commenting and favoriting songs unless they're signed in._
+- **Add song to favorites** - _Users can add a song to their favorites and access a list of their favorite songs_
+- **Add comments** - _Users will be able to add comments to songs, and reply to other people's comments_
 
 ## Contributors
 
