@@ -2,7 +2,7 @@
 
 ![Languages badge](https://img.shields.io/github/languages/count/jawalton6616/sound-minds-auth)
 ![Last commit badge](https://img.shields.io/github/last-commit/jawalton6616/sound-minds-auth)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/jawalton6616/sound-minds-auth.js/blob/master/LICENSE)
+
 
 ## Description:
 
